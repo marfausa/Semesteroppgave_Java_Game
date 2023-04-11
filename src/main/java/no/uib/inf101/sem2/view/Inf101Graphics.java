@@ -7,6 +7,8 @@ package no.uib.inf101.sem2.view;
 // You may use this code freely. It is provided as-is, without any warranty.
 
 import javax.imageio.ImageIO;
+
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -67,7 +69,7 @@ public class Inf101Graphics {
    * @param height The height of the rectangle
    */
   public static void drawCenteredString(Graphics g, String s, double x, double y,
-                                        double width, double height) {
+    double width, double height) {
     drawCenteredString(g, s, x + width/2, y + height/2);
   }
 
@@ -84,6 +86,17 @@ public class Inf101Graphics {
   public static void drawCenteredString(Graphics g, String s, Shape shape) {
     Inf101Graphics.drawCenteredString(g, s, shape.getBounds2D().getCenterX(),
         shape.getBounds2D().getCenterY());
+        
+  }
+
+  public static void drawTitleString(Graphics g, String s, Shape shape) {
+   
+    Font font = g.getFont().deriveFont(50f);
+    g.setFont(font);
+    Inf101Graphics.drawCenteredString(g, s, shape.getBounds2D().getCenterX()*1.5,
+    shape.getBounds2D().getCenterY()*0.25);
+
+    
   }
 
   //////////////////////////////////////
