@@ -51,6 +51,8 @@ public class Inf101Graphics {
    * @param p The point on which to center the string
    */
   public static void drawCenteredString(Graphics g, String s, Point2D p) {
+    Font font = g.getFont().deriveFont(10f);
+    g.setFont(font);
     Inf101Graphics.drawCenteredString(g, s, p.getX(), p.getY());
   }
 
@@ -84,6 +86,8 @@ public class Inf101Graphics {
    * @param shape in whose bounding box the string will be centered
    */
   public static void drawCenteredString(Graphics g, String s, Shape shape) {
+    Font font = g.getFont().deriveFont(30f);
+    g.setFont(font);
     Inf101Graphics.drawCenteredString(g, s, shape.getBounds2D().getCenterX(),
         shape.getBounds2D().getCenterY());
         
@@ -91,7 +95,7 @@ public class Inf101Graphics {
 
   public static void drawTitleString(Graphics g, String s, Shape shape) {
    
-    Font font = g.getFont().deriveFont(50f);
+    Font font = g.getFont().deriveFont(60f);
     g.setFont(font);
     Inf101Graphics.drawCenteredString(g, s, shape.getBounds2D().getCenterX()*1.5,
     shape.getBounds2D().getCenterY()*0.25);
