@@ -17,11 +17,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 /**
  * A sample view to get you inspired for your own project.
  */
 public class TitleScreen extends JPanel implements ActionListener {
-  
+
+  private ViewableQuizModel model;
   final int PANEL_WIDTH = 1200;
   final int PANEL_HEIGHT = 800;
   
@@ -41,7 +43,8 @@ public class TitleScreen extends JPanel implements ActionListener {
   int x = 0;
   int y = 0;
   
-  public TitleScreen() {
+  public TitleScreen(ViewableQuizModel model) {
+    this.model = model;
     this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
     this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     this.setupMousePositionUpdater();
@@ -55,7 +58,6 @@ public class TitleScreen extends JPanel implements ActionListener {
     timer.start();
 
   }
-
 
   @Override
   protected void paintComponent(Graphics g) {
