@@ -75,10 +75,6 @@ public class TitleScreen extends JPanel implements ActionListener {
     Inf101Graphics.drawImage(g2, ivar, rect.getX() , rect.getY() , scale);
     
 
-    // Calculate the position of the sunglasses image
-    y = (int) (getHeight() / 2.8 - sunglasses.getHeight() / 2);
-    g2.drawImage(sunglasses, x, y, null);
-
      // Draw start button
     Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
 
@@ -94,6 +90,10 @@ public class TitleScreen extends JPanel implements ActionListener {
       g2.setColor(color);
       g2.draw(startButton);
       Inf101Graphics.drawCenteredString(g2, "START", startButton);
+      // Calculate the position of the sunglasses image
+      y = (int) (getHeight() / 2.8 - sunglasses.getHeight() / 2);
+      g2.drawImage(sunglasses, x, y, null);
+      
     } else{
       startButton = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 20, rect.getY() + rect.getHeight() / 2 , 500, 100);
       g2.setColor(color);
@@ -107,6 +107,7 @@ public class TitleScreen extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    if (startIsPressed){
     x = x+xVelocity;
     int speedUp = xVelocity * -2;
     int onEye = 135;
@@ -118,7 +119,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     if (xVelocity <0 && x == onEye ){
       xVelocity = 0;
     }
-    
+    }
     repaint();
     
   }
