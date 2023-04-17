@@ -36,6 +36,7 @@ public class QuizView extends JPanel implements ActionListener {
   boolean continueIsPressed = false;
   boolean startIsPressed = false;
   boolean readyToQuiz = false;
+  boolean startedQuiz = false;
   
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
@@ -51,6 +52,9 @@ public class QuizView extends JPanel implements ActionListener {
   int y = 0;
   int countdown = 5;
   int onEye = 135;
+
+  float start = 60f;
+  float end = 180f;
   
   public QuizView(ViewableQuizModel model) {
     this.model = model;
@@ -80,6 +84,10 @@ public class QuizView extends JPanel implements ActionListener {
     if (gamestate == GameState.ACTIVE_GAME){
       timer.setDelay(1000);
       countDown();
+      if (startedQuiz){
+        timer.setDelay(1);
+        expandingWord();
+      }
     }
     repaint();
     
@@ -149,7 +157,7 @@ public class QuizView extends JPanel implements ActionListener {
   }
 
   private void drawQuiz(Graphics2D g4){
-    // Draw a centered rectangle with title text
+  
     Rectangle2D rect = this.getRectangle();
 
     g4.setColor(Color.BLACK);
@@ -159,12 +167,15 @@ public class QuizView extends JPanel implements ActionListener {
 
     if (countdown > 0){
       Inf101Graphics.drawCenteredString(g4, String.valueOf(countdown), rect, 60f);
-    } else if (countdown == 0){
+    } 
+    if (countdown == 0){
       Inf101Graphics.drawCenteredString(g4, "KVISS START!", rect, 60f);
+      startedQuiz = true;
     }
-    
-    
 
+    if (countdown <0){
+    Inf101Graphics.drawCenteredString(g4, "Spørsmål 1", rect, this.start);
+    }
     
 
   }
@@ -232,8 +243,15 @@ public class QuizView extends JPanel implements ActionListener {
       }
   }
   private void countDown(){
-    if (countdown > 0){
+    if (countdown > -500){
       countdown -= 1;
     } 
   }
-}
+
+  private void expandingWord(){
+    if (start < end){
+      start *= 1.0004;
+    }
+    }
+  }
+
