@@ -24,7 +24,7 @@ import no.uib.inf101.sem2.model.GameState;
 /**
  * A sample view to get you inspired for your own project.
  */
-public class TitleScreen extends JPanel implements ActionListener {
+public class QuizView extends JPanel implements ActionListener {
 
   private ViewableQuizModel model;
   final int PANEL_WIDTH = 1200;
@@ -49,9 +49,10 @@ public class TitleScreen extends JPanel implements ActionListener {
   int yVelocity = 1;
   int x = 0;
   int y = 0;
+  int countdown = 5;
   int onEye = 135;
   
-  public TitleScreen(ViewableQuizModel model) {
+  public QuizView(ViewableQuizModel model) {
     this.model = model;
     this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
     this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -64,24 +65,21 @@ public class TitleScreen extends JPanel implements ActionListener {
 
     timer = new Timer(4, this);
     timer.start();
+  
+
+    }
 
       
-    }
 
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if (continueIsPressed){
-      x = x+xVelocity;
-      int speedUp = xVelocity * -2;
-
-      if (x > PANEL_WIDTH-sunglasses.getWidth() || x<0){
-        xVelocity = speedUp;
-      }
-
-      if (xVelocity <0 && x == onEye ){
-        xVelocity = 0;
-      }
+      moveSunglasses();
+    }
+    if (gamestate == GameState.ACTIVE_GAME){
+      timer.setDelay(1000);
+      countDown();
     }
     repaint();
     
@@ -91,76 +89,88 @@ public class TitleScreen extends JPanel implements ActionListener {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
-    drawTitleScreen(g2);
-
     Graphics2D g3 = (Graphics2D) g;
-    
-    if (gamestate == GameState.ACTIVE_GAME){
-      drawQuiz(g3);
+    Graphics2D g4 = (Graphics2D) g;
+
+    drawFrame(g2);
+
+    if (gamestate == GameState.TITLE_SCREEN){
+      drawTitleScreen(g3);
     }
+
+    else if (gamestate == GameState.ACTIVE_GAME){
+      drawQuiz(g4);
+    }
+
 
   }
 
 
- 
-  private void drawTitleScreen(Graphics2D g2){
+  private void drawFrame(Graphics2D g2){
+      Rectangle2D rect = this.getRectangle();
+      g2.setColor(Color.BLACK);
+      g2.draw(rect);
+    }
+
+  private void drawTitleScreen(Graphics2D g3){
 
      // Draw a centered rectangle with title text
      Rectangle2D rect = this.getRectangle();
      Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
      double scale = (rect.getHeight()/ivar.getHeight());
- 
-     g2.setColor(Color.BLACK);
-     g2.draw(rect);
-     
-     Inf101Graphics.drawTitleString(g2, "NynorskKviss!", rect); 
+     Inf101Graphics.drawTitleString(g3, "NynorskKviss!", rect); 
      
      // Draw Ivar Aasen in the left side of the rectangle
-     Inf101Graphics.drawImage(g2, ivar, rect.getX() , rect.getY() , scale);
+     Inf101Graphics.drawImage(g3, ivar, rect.getX() , rect.getY() , scale);
      
-     
-     // Draw start button
-     
+     // Draw buttons
      if (continueIsPressed){
        button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 200, rect.getY() + rect.getHeight() / 2 , 150, 100);
-       g2.setColor(color);
-       g2.draw(button);
-       Inf101Graphics.drawCenteredString(g2, "START", button);
+       g3.setColor(color);
+       g3.draw(button);
+       Inf101Graphics.drawCenteredString(g3, "START", button);
        // Initiate position of sunglasses image
        y = (int) (getHeight() / 2.8 - sunglasses.getHeight() / 2);
-       g2.drawImage(sunglasses, x, y, null);
+       g3.drawImage(sunglasses, x, y, null);
 
 
      } else{
        button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 20, rect.getY() + rect.getHeight() / 2 , 500, 100);
-       g2.setColor(color);
-       g2.draw(button);
-       Inf101Graphics.drawCenteredString(g2, "Klikk for å fortsetja", button);
-
+       g3.setColor(color);
+       g3.draw(button);
+       Inf101Graphics.drawCenteredString(g3, "Klikk for å fortsetja", button);
      }
 
      if (startIsPressed){
+      button = new Rectangle2D.Double();
       gamestate = GameState.ACTIVE_GAME;
      }
      
   }
 
-
-  private void drawQuiz(Graphics2D g3){
+  private void drawQuiz(Graphics2D g4){
     // Draw a centered rectangle with title text
     Rectangle2D rect = this.getRectangle();
 
-    g3.setColor(Color.BLACK);
-    g3.draw(rect);
-    g3.fill(rect);
+    g4.setColor(Color.BLACK);
+    g4.draw(rect);
+    g4.fill(rect);
+    g4.setColor(Color.WHITE);
+
+    if (countdown > 0){
+      Inf101Graphics.drawCenteredString(g4, String.valueOf(countdown), rect, 60f);
+    } else if (countdown == 0){
+      Inf101Graphics.drawCenteredString(g4, "KVISS START!", rect, 60f);
+    }
+    
+    
+
+    
 
   }
   
   private Rectangle2D getRectangle() {
     return new Rectangle2D.Double(50, 50, getWidth() - 100, getHeight() - 100);
-  }
-  private Rectangle2D getButton(){
-    return button;
   }
 
   private void setupMousePositionUpdater() {
@@ -168,7 +178,7 @@ public class TitleScreen extends JPanel implements ActionListener {
     this.addMouseMotionListener(new MouseMotionAdapter() {
       @Override
       public void mouseMoved(MouseEvent e) {
-        mouseIsInTheRectangle = getButton().contains(e.getPoint());
+        mouseIsInTheRectangle = button.contains(e.getPoint());
         updateCursor();
         repaint();
       }
@@ -209,9 +219,21 @@ public class TitleScreen extends JPanel implements ActionListener {
     });
   }
 
+  private void moveSunglasses(){
+    x = x+xVelocity;
+      int speedUp = xVelocity * -2;
 
+      if (x > PANEL_WIDTH-sunglasses.getWidth() || x<0){
+        xVelocity = speedUp;
+      }
 
-
-
-  
+      if (xVelocity <0 && x == onEye ){
+        xVelocity = 0;
+      }
+  }
+  private void countDown(){
+    if (countdown > 0){
+      countdown -= 1;
+    } 
+  }
 }
