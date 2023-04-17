@@ -15,5 +15,12 @@ public class TitleScreenTest {
   @Test
   public void sunGlassesTest() {
     int xOnEye = 135;
+    boolean startIsPressed;
+  }
+
+  @Test
+  public void drawQuizTest() {
+    TitleScreen ts = new TitleScreen(null);
+  
   }
 }
