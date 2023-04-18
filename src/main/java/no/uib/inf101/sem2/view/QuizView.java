@@ -72,7 +72,6 @@ public class QuizView extends JPanel implements ActionListener {
     
     ivar = Inf101Graphics.loadImageFromResources("/aasen.png");
     sunglasses = Inf101Graphics.loadImageFromResources("/sunglasses.png");
-    background = Inf101Graphics.loadImageFromResources("/background.png");
 
     timer = new Timer(4, this);
     timer.start();
@@ -186,6 +185,10 @@ public class QuizView extends JPanel implements ActionListener {
     }
     if (countdown <-1){
       Inf101Graphics.drawCenteredString(g4, "ORD 1", rect, this.start);
+      if (this.start > 179f){
+        g4.setColor(Color.RED);
+        Inf101Graphics.drawCenteredString(g4, "ORD 1", rect, this.end);
+      }
       }
     
 
