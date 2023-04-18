@@ -36,7 +36,14 @@ public class QuizView extends JPanel implements ActionListener {
   boolean continueIsPressed = false;
   boolean startIsPressed = false;
   boolean readyToQuiz = false;
+
   boolean startedQuiz = false;
+  boolean startLevel5 = false;
+  boolean startLevel4 = false;
+  boolean startLevel3 = false;
+  boolean startLevel2 = false;
+  boolean startLevel1 = false;
+  
   
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
@@ -173,9 +180,13 @@ public class QuizView extends JPanel implements ActionListener {
       startedQuiz = true;
     }
 
-    if (countdown <0){
-    Inf101Graphics.drawCenteredString(g4, "Spørsmål 1", rect, this.start);
+    if (countdown ==-1){
+      Inf101Graphics.drawCenteredString(g4, "Level 5", rect, 80f);
+      startLevel5 = true;
     }
+    if (countdown <-1){
+      Inf101Graphics.drawCenteredString(g4, "ORD 1", rect, this.start);
+      }
     
 
   }
@@ -250,7 +261,7 @@ public class QuizView extends JPanel implements ActionListener {
 
   private void expandingWord(){
     if (start < end){
-      start *= 1.0004;
+      start *= 1.0003;
     }
     }
   }
