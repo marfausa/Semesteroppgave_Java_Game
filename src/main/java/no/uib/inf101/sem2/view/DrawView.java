@@ -5,18 +5,13 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import no.uib.inf101.sem2.model.GameState;
 
@@ -30,7 +25,7 @@ public class DrawView extends JPanel {
   Rectangle2D button;
   GameState gamestate = GameState.TITLE_SCREEN;
   TitleScreen titleScreen;
-  Timer timer;
+  QuizView quizScreen;
 
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
@@ -47,17 +42,17 @@ public class DrawView extends JPanel {
     this.setupMousePressedUpdater();
     
     titleScreen = new TitleScreen(PANEL_WIDTH);
-  //
+    quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT);
+  
     }
       
-
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
-
     drawFrame(g2);
+
 
     if (gamestate == GameState.TITLE_SCREEN){
       drawTitleScreen(g2);
@@ -67,6 +62,8 @@ public class DrawView extends JPanel {
 
     else if (gamestate == GameState.ACTIVE_GAME){
       drawQuiz(g2);
+      this.gamestate = quizScreen.getGameState();
+      repaint();
     }
 
   }
@@ -85,7 +82,9 @@ public class DrawView extends JPanel {
     
   }
 
-  private void drawQuiz(Graphics2D g4){
+  private void drawQuiz(Graphics2D g2){
+    Rectangle2D rect = this.getRectangle();
+    quizScreen.draw(g2, rect);
   
 
   }

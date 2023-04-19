@@ -3,16 +3,14 @@ package no.uib.inf101.sem2.view;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
-
 import no.uib.inf101.sem2.model.GameState;
 
 
-public class TitleScreen implements ActionListener{
+public class TitleScreen implements ViewableQuizModel{
   private BufferedImage ivar;
   private BufferedImage sunglasses;
   private Rectangle2D button;
@@ -41,22 +39,27 @@ public class TitleScreen implements ActionListener{
     if (continueIsPressed()){
         moveSunglasses();
     }
-}
+  }
+  
+  @Override
+    public GameState getGameState(){
+      return this.gamestate;
+    }
 
-  public void draw(Graphics2D g3, Rectangle2D rect, Color hoverColor) {
+  public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
     Color color = hoverColor;
     double scale = (rect.getHeight() / ivar.getHeight());
-    Inf101Graphics.drawTitleString(g3, "NynorskKviss!", rect);
-    Inf101Graphics.drawImage(g3, ivar, rect.getX(), rect.getY(), scale);
+    Inf101Graphics.drawTitleString(g2, "NynorskKviss!", rect);
+    Inf101Graphics.drawImage(g2, ivar, rect.getX(), rect.getY(), scale);
 
     if (continueIsPressed()) {
-        drawContinued(g3, rect, color);
+        drawContinued(g2, rect, color);
 
     } else {
       button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 20, rect.getY() + rect.getHeight() / 2, 500, 100);
-      g3.setColor(color);
-      g3.draw(button);
-      Inf101Graphics.drawCenteredString(g3, "Klikk for å fortsetja", button);
+      g2.setColor(color);
+      g2.draw(button);
+      Inf101Graphics.drawCenteredString(g2, "Klikk for å fortsetja", button);
     }
 
     if (startIsPressed) {
@@ -65,22 +68,20 @@ public class TitleScreen implements ActionListener{
     }
   }
 
-  private void drawContinued(Graphics2D g3, Rectangle2D rect, Color color){
+  private void drawContinued(Graphics2D g2, Rectangle2D rect, Color color){
     button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 200, rect.getY() + rect.getHeight() / 2, 150, 100);
-      g3.setColor(color);
-      g3.draw(button);
-      Inf101Graphics.drawCenteredString(g3, "START", button);
+      g2.setColor(color);
+      g2.draw(button);
+      Inf101Graphics.drawCenteredString(g2, "START", button);
       // Initiate position of sunglasses image
-      int y = (int) (g3.getClipBounds().getHeight() / 2.8 - sunglasses.getHeight() / 2);
-      g3.drawImage(sunglasses, this.x, y, null);
+      int y = (int) (g2.getClipBounds().getHeight() / 2.8 - sunglasses.getHeight() / 2);
+      g2.drawImage(sunglasses, this.x, y, null);
   }
 
   public Rectangle2D getButton(){
     return this.button;
   }
-  public GameState getGameState(){
-    return this.gamestate;
-  }
+  
 
   public boolean continueIsPressed(){
     return this.continueIsPressed;
