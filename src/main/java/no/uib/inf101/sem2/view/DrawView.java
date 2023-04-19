@@ -21,10 +21,7 @@ import javax.swing.Timer;
 import no.uib.inf101.sem2.model.GameState;
 
 
-/**
- * A sample view to get you inspired for your own project.
- */
-public class QuizView extends JPanel implements ActionListener {
+public class DrawView extends JPanel {
 
   private ViewableQuizModel model;
   final int PANEL_WIDTH = 1200;
@@ -33,68 +30,27 @@ public class QuizView extends JPanel implements ActionListener {
   Rectangle2D button;
   GameState gamestate = GameState.TITLE_SCREEN;
   TitleScreen titleScreen;
+  Timer timer;
 
-  boolean readyToQuiz = false;
-
-  boolean startedQuiz = false;
-  boolean startLevel5 = false;
-  boolean startLevel4 = false;
-  boolean startLevel3 = false;
-  boolean startLevel2 = false;
-  boolean startLevel1 = false;
-  
-  
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
 
-  private BufferedImage ivar;
-  private BufferedImage sunglasses;
-  private BufferedImage background;
-
-  private Timer timer;
-  int xVelocity = 5;
-  int yVelocity = 1;
-  int x = 0;
-  int y = 0;
-  int countdown = 5;
-  int onEye = 135;
 
   float start = 60f;
   float end = 180f;
   
-  public QuizView(ViewableQuizModel model) {
+  public DrawView(ViewableQuizModel model) {
     this.model = model;
     this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
     this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     this.setupMousePositionUpdater();
     this.setupMousePressedUpdater();
     
-    ivar = Inf101Graphics.loadImageFromResources("/aasen.png");
-    sunglasses = Inf101Graphics.loadImageFromResources("/sunglasses.png");
-
-    timer = new Timer(4, this);
-    timer.start();
-  
-
+    titleScreen = new TitleScreen(PANEL_WIDTH);
+  //
     }
-
       
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if (titleScreen.continueIsPressed()){
-      moveSunglasses();
-    }
-    if (gamestate == GameState.ACTIVE_GAME){
-      timer.setDelay(1000);
-      countDown();
-      if (startedQuiz){
-        timer.setDelay(1);
-        expandingWord();
-      }
-    }
-    repaint();
-    
-  }
+
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -105,12 +61,13 @@ public class QuizView extends JPanel implements ActionListener {
 
     if (gamestate == GameState.TITLE_SCREEN){
       drawTitleScreen(g2);
+      this.gamestate = titleScreen.getGameState();
+      repaint();
     }
 
     else if (gamestate == GameState.ACTIVE_GAME){
       drawQuiz(g2);
     }
-
 
   }
 
@@ -130,33 +87,6 @@ public class QuizView extends JPanel implements ActionListener {
 
   private void drawQuiz(Graphics2D g4){
   
-    Rectangle2D rect = this.getRectangle();
-
-    g4.setColor(Color.BLACK);
-    g4.draw(rect);
-    g4.fill(rect);
-    g4.setColor(Color.WHITE);
-
-    if (countdown > 0){
-      Inf101Graphics.drawCenteredString(g4, String.valueOf(countdown), rect, 60f);
-    } 
-    if (countdown == 0){
-      Inf101Graphics.drawCenteredString(g4, "KVISS START!", rect, 60f);
-      startedQuiz = true;
-    }
-
-    if (countdown ==-1){
-      Inf101Graphics.drawCenteredString(g4, "Level 5", rect, 80f);
-      startLevel5 = true;
-    }
-    if (countdown <-1){
-      Inf101Graphics.drawCenteredString(g4, "ORD 1", rect, this.start);
-      if (this.start > 179f){
-        g4.setColor(Color.RED);
-        Inf101Graphics.drawCenteredString(g4, "ORD 1", rect, this.end);
-      }
-      }
-    
 
   }
   
@@ -215,28 +145,10 @@ public class QuizView extends JPanel implements ActionListener {
 
   }
 
-  private void moveSunglasses(){
-    x = x+xVelocity;
-      int speedUp = xVelocity * -2;
 
-      if (x > PANEL_WIDTH-sunglasses.getWidth() || x<0){
-        xVelocity = speedUp;
-      }
 
-      if (xVelocity <0 && x == onEye ){
-        xVelocity = 0;
-      }
-  }
-  private void countDown(){
-    if (countdown > -500){
-      countdown -= 1;
-    } 
-  }
 
-  private void expandingWord(){
-    if (start < end){
-      start *= 1.0003;
-    }
-    }
+  
+
   }
 

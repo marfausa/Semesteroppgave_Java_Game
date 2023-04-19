@@ -8,4 +8,6 @@ public interface ControllableQuizModel {
      * @return GameState objekt, om det er Game Over eller ikke
      */
     GameState getGameState();
+
+    void updateInputString(char c);
 }

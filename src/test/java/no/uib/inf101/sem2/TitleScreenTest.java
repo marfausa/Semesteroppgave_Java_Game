@@ -3,7 +3,7 @@ package no.uib.inf101.sem2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import no.uib.inf101.sem2.view.QuizView;
+import no.uib.inf101.sem2.view.DrawView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,7 +20,7 @@ public class TitleScreenTest {
 
   @Test
   public void drawQuizTest() {
-    QuizView ts = new QuizView(null);
+    DrawView ts = new DrawView(null);
   
   }
 }
