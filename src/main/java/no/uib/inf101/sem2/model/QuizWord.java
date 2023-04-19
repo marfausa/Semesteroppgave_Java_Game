@@ -10,6 +10,7 @@ public class QuizWord {
 
     QuizWord(String word, String answer, Color color) {
         this.word = word;
+        this.answer = answer;
         this.color = color;
     }
     
