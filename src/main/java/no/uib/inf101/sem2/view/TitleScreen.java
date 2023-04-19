@@ -70,12 +70,13 @@ public class TitleScreen implements ViewableQuizModel{
 
   private void drawContinued(Graphics2D g2, Rectangle2D rect, Color color){
     button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 200, rect.getY() + rect.getHeight() / 2, 150, 100);
-      g2.setColor(color);
-      g2.draw(button);
-      Inf101Graphics.drawCenteredString(g2, "START", button);
-      // Initiate position of sunglasses image
-      int y = (int) (g2.getClipBounds().getHeight() / 2.8 - sunglasses.getHeight() / 2);
-      g2.drawImage(sunglasses, this.x, y, null);
+    g2.setColor(color);
+    g2.draw(button);
+    Inf101Graphics.drawCenteredString(g2, "START", button);
+    
+    // Initiate position of sunglasses image
+    int y = (int) (g2.getClipBounds().getHeight() / 2.8 - sunglasses.getHeight() / 2);
+    g2.drawImage(sunglasses, this.x, y, null);
   }
 
   public Rectangle2D getButton(){

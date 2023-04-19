@@ -16,11 +16,6 @@ public class TitleScreenTest {
   public void sunGlassesTest() {
     int xOnEye = 135;
     boolean startIsPressed;
-  }
-
-  @Test
-  public void drawQuizTest() {
-    DrawView ts = new DrawView(null);
-  
+    
   }
 }
