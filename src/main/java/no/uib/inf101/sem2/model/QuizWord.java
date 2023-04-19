@@ -13,7 +13,16 @@ public class QuizWord {
         this.answer = answer;
         this.color = color;
     }
-    
+
+    public String getQuestion(){
+        return this.word;
+    }
+    public String getAnswer(){
+        return this.answer;
+    }
+    public Color getWordColor(){
+        return this.color;
+    }
 
 
 }

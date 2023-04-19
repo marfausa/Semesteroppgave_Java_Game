@@ -14,11 +14,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import no.uib.inf101.sem2.model.GameState;
+import no.uib.inf101.sem2.model.QuizModel;
 
 
 public class DrawView extends JPanel {
 
-  private ViewableQuizModel model;
+  private QuizModel model;
   final int PANEL_WIDTH = 1200;
   final int PANEL_HEIGHT = 800;
   
@@ -34,7 +35,7 @@ public class DrawView extends JPanel {
   float start = 60f;
   float end = 180f;
   
-  public DrawView(ViewableQuizModel model) {
+  public DrawView(QuizModel model) {
     this.model = model;
     this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
     this.setBorder(BorderFactory.createLineBorder(Color.BLACK));

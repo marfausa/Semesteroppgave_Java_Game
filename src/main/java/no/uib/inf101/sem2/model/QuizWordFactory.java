@@ -8,7 +8,7 @@ import java.util.Random;
 public class QuizWordFactory {
     
 //String[] quizWords;
-QuizWord[] level1 = {
+QuizWord[] level5 = {
         new QuizWord("Få hugilt","bli ille til mote", Color.RED),
         new QuizWord("Kome or vona", "miste håpet", Color.BLUE),
         new QuizWord("Rettferdsvederlag", "Billighetserstatning", Color.RED),
@@ -20,7 +20,7 @@ QuizWord[] level1 = {
         new QuizWord("Hovmod", "Arroganse", Color.BLUE)
 };
 
-QuizWord[] level2 = {
+QuizWord[] level4 = {
     new QuizWord("Korkje","Verken", Color.RED),
     new QuizWord("Reiarlag", "Rederi", Color.BLUE),
     new QuizWord("Hopehav", "Fellesskap", Color.RED),
@@ -43,7 +43,7 @@ QuizWord[] level3 = {
     
 };
 
-QuizWord[] level4 = {
+QuizWord[] level2 = {
 new QuizWord("Augneblink","Øyeblikk", Color.RED),
 new QuizWord("Synfaring", "Befaring", Color.BLUE),
 new QuizWord("Verksemd", "Bedrift", Color.RED),
@@ -54,7 +54,7 @@ new QuizWord("Tilsett", "Ansatt", Color.RED),
 
 };
 
-QuizWord[] level5 = {
+QuizWord[] level1 = {
     new QuizWord("Yrkedag","Virkedag", Color.RED),
     new QuizWord("Arbeidsløyse", "Arbeidsledighet", Color.BLUE),
     new QuizWord("Byrja", "Begynne", Color.RED),
