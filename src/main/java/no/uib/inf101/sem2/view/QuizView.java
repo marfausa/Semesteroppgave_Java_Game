@@ -18,7 +18,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import no.uib.inf101.sem2.controller.ControllableQuizModel;
 import no.uib.inf101.sem2.model.GameState;
+import no.uib.inf101.sem2.model.QuizModel;
 
 
 /**
@@ -34,6 +36,7 @@ public class QuizView implements ViewableQuizModel {
   TitleScreen titleScreen;
   Timer timer;
 
+  boolean startCountdown = false;
   boolean startedQuiz = false;
   boolean startLevel5 = false;
   boolean startLevel4 = false;
@@ -41,23 +44,24 @@ public class QuizView implements ViewableQuizModel {
   boolean startLevel2 = false;
   boolean startLevel1 = false;
   
-  int countdown = 5;
+  int countdown = 4;
   float start = 60f;
   float end = 180f;
   
-  public QuizView(int pw, int ph) {
+  public QuizView(int pw, int ph, ViewableQuizModel model) {
     PANEL_WIDTH = pw;
     PANEL_HEIGHT = ph;
-    
+    this.model = model;
+
     timer = new Timer(1000, this);
-    timer.start();
-  
+
     }
 
       
   @Override
   public void actionPerformed(ActionEvent e) {
     countDown();
+    startCountdown = true;
     if (startedQuiz){
       timer.setDelay(1);
       expandingWord();
@@ -69,14 +73,22 @@ public class QuizView implements ViewableQuizModel {
     return this.gamestate;
   }
 
+  public void startTimer(){
+    timer.start();
+  }
+
   public void draw(Graphics2D g2, Rectangle2D rect) {
     g2.setColor(Color.BLACK);
     g2.draw(rect);
     g2.fill(rect);
     g2.setColor(Color.WHITE);
 
-    if (countdown > 0){
+    
+    if (countdown > 3){
+      Inf101Graphics.drawCenteredString(g2, "Gjer klar for nedteljing", rect, 60f);
+    } else if (countdown > 0){
       Inf101Graphics.drawCenteredString(g2, String.valueOf(countdown), rect, 60f);
+
     } 
     if (countdown == 0){
       Inf101Graphics.drawCenteredString(g2, "KVISS START!", rect, 60f);
@@ -100,7 +112,7 @@ public class QuizView implements ViewableQuizModel {
   
   
   private void countDown(){
-    if (countdown > -500){
+    if (startCountdown){
       countdown -= 1;
     } 
   }

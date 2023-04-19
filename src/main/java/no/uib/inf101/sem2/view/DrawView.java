@@ -42,7 +42,7 @@ public class DrawView extends JPanel {
     this.setupMousePressedUpdater();
     
     titleScreen = new TitleScreen(PANEL_WIDTH);
-    quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT);
+    quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model);
   
     }
       
@@ -61,6 +61,7 @@ public class DrawView extends JPanel {
     }
 
     else if (gamestate == GameState.ACTIVE_GAME){
+      quizScreen.startTimer();
       drawQuiz(g2);
       this.gamestate = quizScreen.getGameState();
       repaint();
@@ -85,6 +86,7 @@ public class DrawView extends JPanel {
   private void drawQuiz(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     quizScreen.draw(g2, rect);
+    
   
 
   }

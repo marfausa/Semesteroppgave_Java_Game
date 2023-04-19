@@ -40,7 +40,7 @@ public class TitleScreen implements ViewableQuizModel{
         moveSunglasses();
     }
   }
-  
+
   @Override
     public GameState getGameState(){
       return this.gamestate;
@@ -108,6 +108,7 @@ public void moveSunglasses(){
 
       if (xVelocity <0 && x == onEye ){
         xVelocity = 0;
+        timer.stop();
       }
   }
 

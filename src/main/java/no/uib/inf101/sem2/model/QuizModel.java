@@ -1,5 +1,7 @@
 package no.uib.inf101.sem2.model;
 
+import java.awt.event.ActionEvent;
+
 import no.uib.inf101.sem2.controller.ControllableQuizModel;
 import no.uib.inf101.sem2.view.ViewableQuizModel;
 
@@ -27,6 +29,12 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     public void updateInputString(char c) {
         currentInput += c;
         System.out.println(currentInput);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
     
 
