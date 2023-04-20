@@ -33,7 +33,9 @@ public class QuizController implements KeyListener{
                 if (controller.inputCheckAnswer(currentInput) == false){
                     currentInput = "";
                 } else if (controller.inputCheckAnswer(currentInput)){
+                    controller.getNextWord();
                     currentInput = "";
+
                 }
 
             } else if (keyChar == KeyEvent.VK_BACK_SPACE) {

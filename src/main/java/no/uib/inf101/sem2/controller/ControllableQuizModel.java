@@ -15,6 +15,12 @@ public interface ControllableQuizModel {
 
     public String getInputAnswer();
 
+    public void startLevel();
+
+    public int getCurrentLevel();
+
+    public void getNextWord();
+
 
 
 }
