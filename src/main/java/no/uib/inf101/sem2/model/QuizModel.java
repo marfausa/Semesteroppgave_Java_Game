@@ -23,6 +23,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.gameState = GameState.ACTIVE_GAME;
         this.levelList = new ArrayList<>();
         nextLevel();
+        System.out.println(levelList);
         
         
     }
@@ -46,18 +47,24 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
 
 
     public QuizWord getCurrentWord(){
-        Random randomWord = new Random();
-        int randomIndex = randomWord.nextInt(levelList.size());
-        currentQuizWord = levelList.get(randomIndex);
-        this.levelList.remove(randomIndex);
-
+        if (levelList.size() >0){
+            Random randomWord = new Random();
+            int randomIndex = randomWord.nextInt(levelList.size());
+            currentQuizWord = levelList.get(randomIndex);
+            this.levelList.remove(randomIndex);
+            }
         return currentQuizWord;
-        }
+        
+         }
+
+    public ArrayList<QuizWord> getWordList(){
+        return this.levelList;
+    }
 
     private void nextLevel(){
         if ((levelList.size() == 0 && this.level <= 5) || level == 0){
             this.level +=1;
-            this.levelList = this.quizWordFactory.getWordList(this.level);
+            this.levelList = this.quizWordFactory.GetNewQuizWords(level);
         }
     }
     }
