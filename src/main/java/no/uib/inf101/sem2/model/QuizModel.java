@@ -42,8 +42,8 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     }
 
     @Override
-    public void updateInputString(char c) {
-        currentInput += c;
+    public void updateInputString(String inp) {
+        currentInput = inp;
         System.out.println(currentInput);
     }
 

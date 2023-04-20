@@ -9,5 +9,8 @@ public interface ControllableQuizModel {
      */
     GameState getGameState();
 
-    void updateInputString(char c);
+    void updateInputString(String c);
+
+    public String getInputAnswer();
+
 }
