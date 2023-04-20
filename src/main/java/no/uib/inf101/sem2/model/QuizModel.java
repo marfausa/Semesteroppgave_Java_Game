@@ -32,7 +32,6 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
@@ -42,9 +41,19 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     }
 
     @Override
-    public void updateInputString(String inp) {
-        currentInput = inp;
+    public void updateInputString(String input) {
+        currentInput = input;
         System.out.println(currentInput);
+    }
+
+    @Override
+    public boolean inputCheckAnswer(String input) {
+        if (input == this.currentAnswer){
+            getCurrentWord();
+            return true;
+        } else{
+            return false;
+        }
     }
 
 
@@ -67,13 +76,14 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     }
 
 
-
     private void nextLevel(){
         if ((levelList.size() == 0 && this.level <= 5) || level == 0){
             this.level +=1;
             this.levelList = this.quizWordFactory.GetNewQuizWords(level);
         }
     }
+
+   
     }
 
 

@@ -17,7 +17,6 @@ public class QuizController implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
@@ -30,7 +29,12 @@ public class QuizController implements KeyListener{
         
         if (keyChar == KeyEvent.VK_ENTER) {
             // Enter key was pressed
-            // Do something...
+           if (controller.inputCheckAnswer(currentInput) == false){
+                currentInput = "";
+           } else if (controller.inputCheckAnswer(currentInput)){
+            currentInput = "RIKTIG";
+           }
+
         } else if (keyChar == KeyEvent.VK_BACK_SPACE) {
             // Backspace key was pressed
             if (currentInput.length() > 0) {
@@ -48,7 +52,6 @@ public class QuizController implements KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
 }
