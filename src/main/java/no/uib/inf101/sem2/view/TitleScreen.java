@@ -75,7 +75,7 @@ public class TitleScreen implements ViewableQuizModel{
     Inf101Graphics.drawCenteredString(g2, "START", button);
     
     // Initiate position of sunglasses image
-    int y = (int) (g2.getClipBounds().getHeight() / 2.8 - sunglasses.getHeight() / 2);
+    int y = (int) (rect.getBounds().getHeight() / 2.4 - sunglasses.getHeight() / 2);
     g2.drawImage(sunglasses, this.x, y, null);
   }
 

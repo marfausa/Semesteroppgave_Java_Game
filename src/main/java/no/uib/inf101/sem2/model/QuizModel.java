@@ -18,6 +18,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     private String currentInput = "";   
     private String currentQuestion;
     private String currentAnswer;
+    private String wrongAnswers;
 
 
     public QuizModel(QuizWordFactory quizWordFactory) {
@@ -52,10 +53,11 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
             getCurrentWord();
             return true;
         } else{
+            this.wrongAnswers = input;
             return false;
         }
     }
-
+    
 
     public QuizWord getCurrentWord(){
         if (levelList.size() >0){
@@ -73,6 +75,9 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     }
     public String getInputAnswer(){
         return currentInput;
+    }
+    public String getWrongAnswer(){
+        return wrongAnswers;
     }
 
 

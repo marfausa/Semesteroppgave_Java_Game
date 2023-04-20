@@ -30,11 +30,11 @@ public class QuizController implements KeyListener{
             
             if (keyChar == KeyEvent.VK_ENTER) {
                 // Enter key was pressed
-            if (controller.inputCheckAnswer(currentInput) == false){
+                if (controller.inputCheckAnswer(currentInput) == false){
                     currentInput = "";
-            } else if (controller.inputCheckAnswer(currentInput)){
-                currentInput = "RIKTIG";
-            }
+                } else if (controller.inputCheckAnswer(currentInput)){
+                    currentInput = "";
+                }
 
             } else if (keyChar == KeyEvent.VK_BACK_SPACE) {
                 // Backspace key was pressed

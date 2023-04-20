@@ -34,7 +34,7 @@ public class DrawView extends JPanel {
 
 
   float start = 60f;
-  float end = 200f;
+  float end = 240f;
   
   public DrawView(QuizModel model) {
     this.model = model;

@@ -37,8 +37,10 @@ public class QuizView implements ViewableQuizModel {
   
   int stageCounter = 20;
   int countdown = 4;
+  boolean wrongAnswer;
+
   float start = 60f;
-  float end = 200f;
+  float end = 240f;
   
   public QuizView(int pw, int ph, QuizModel model) {
     PANEL_WIDTH = pw;
@@ -93,8 +95,27 @@ public class QuizView implements ViewableQuizModel {
   public void drawAmountCorrectAnswers(Graphics2D g2, Rectangle2D rect){
     if (startedQuiz){
       g2.setColor(Color.WHITE);
+      g2.setFont(new Font("Arial", Font.PLAIN, 24));
       g2.drawString("Resterande oppgåver: " + stageCounter, 80, 100);
+
+      String wrongInput = model.getWrongAnswer();
+      if (wrongInput != null && !wrongInput.equalsIgnoreCase(currentAnswer)){
+        wrongAnswer = true;
+      }
+
+      if ( wrongAnswer){
+        drawWrongAnswers(g2, rect, wrongInput);
+      }
     }
+  }
+
+  private void drawWrongAnswers(Graphics2D g2, Rectangle2D rect, String wrongInput){
+        g2.setFont(new Font("Arial", Font.PLAIN, 24));
+        g2.setColor(Color.RED);
+        g2.drawString("X " + wrongInput, 80, 150);
+        g2.setColor(Color.WHITE);
+      
+    
   }
   
   public String getLastWord(){
@@ -136,7 +157,7 @@ public class QuizView implements ViewableQuizModel {
       Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.start);
       inputBox.drawInputBox();
       }
-    if (this.start > 199f){
+    if (this.start > 239f){
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.end);
       gamestate = GameState.GAME_OVER;

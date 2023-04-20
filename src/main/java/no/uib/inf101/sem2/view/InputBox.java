@@ -2,22 +2,16 @@ package no.uib.inf101.sem2.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.Timer;
 
-public class InputBox implements ActionListener {
+public class InputBox  {
     Rectangle2D inputBox;
     Graphics2D g2;
     String input;
     Timer timer;
     int width;
-
-    int x = 1;
-    int y = 0;
-    int xVelocity = 5;
 
 
     public InputBox(Graphics2D g2, Rectangle2D rect, String input){
@@ -26,7 +20,6 @@ public class InputBox implements ActionListener {
         this.g2 = g2;
         this.input = input;
        
-
     }
 
     public void drawInputBox(){
@@ -39,22 +32,11 @@ public class InputBox implements ActionListener {
         g2.setColor(color.WHITE);
         Inf101Graphics.drawCenteredString(g2, input, inputBox);
 
-    
       }
-    
-    public void glideInputBox(){
-        x = x+xVelocity;
-        if (x == width){
 
-        }
-        //HELP
-        }
-    
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        glideInputBox();
+    public String getInput(){
+        return this.input;
     }
+    
     
 }
