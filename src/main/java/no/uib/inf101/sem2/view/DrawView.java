@@ -3,6 +3,7 @@ package no.uib.inf101.sem2.view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -32,8 +33,8 @@ public class DrawView extends JPanel {
   private boolean mouseIsPressed = false;
 
 
-  float start = 40f;
-  float end = 160f;
+  float start = 60f;
+  float end = 200f;
   
   public DrawView(QuizModel model) {
     this.model = model;
@@ -53,6 +54,7 @@ public class DrawView extends JPanel {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
     drawFrame(g2);
+
 
 
     if (gamestate == GameState.TITLE_SCREEN){
@@ -80,6 +82,7 @@ public class DrawView extends JPanel {
       Rectangle2D rect = this.getRectangle();
       g2.setColor(Color.BLACK);
       g2.draw(rect);
+      g2.clip(rect);
       
     }
   

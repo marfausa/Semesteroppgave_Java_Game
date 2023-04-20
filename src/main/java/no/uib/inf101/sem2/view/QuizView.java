@@ -1,6 +1,7 @@
 package no.uib.inf101.sem2.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
@@ -34,10 +35,10 @@ public class QuizView implements ViewableQuizModel {
   boolean startLevel2 = false;
   boolean startLevel1 = false;
   
-  int stageCounter;
+  int stageCounter = 20;
   int countdown = 4;
-  float start = 40f;
-  float end = 160f;
+  float start = 60f;
+  float end = 200f;
   
   public QuizView(int pw, int ph, QuizModel model) {
     PANEL_WIDTH = pw;
@@ -76,16 +77,25 @@ public class QuizView implements ViewableQuizModel {
 
   public void draw(Graphics2D g2, Rectangle2D rect) {
     inputBox = new InputBox(g2, rect, this.model.getInputAnswer());
+   // Font font = new Font("Serif", Font.BOLD, 24); // create a new font with size 24
+    //g2.setFont(font);
     g2.setColor(Color.BLACK);
     g2.draw(rect);
     g2.fill(rect);
     g2.setColor(Color.WHITE);
 
+    drawAmountCorrectAnswers(g2, rect);
     drawCountdown(g2, rect);
     drawQuizStage(g2, rect);
 
     
+  }
+  public void drawAmountCorrectAnswers(Graphics2D g2, Rectangle2D rect){
+    if (startedQuiz){
+      g2.setColor(Color.WHITE);
+      g2.drawString("Resterande oppgåver: " + stageCounter, 80, 100);
     }
+  }
   
   public String getLastWord(){
     return currentQuestion;
@@ -116,7 +126,7 @@ public class QuizView implements ViewableQuizModel {
     }
 
     if (countdown ==-1){
-      Inf101Graphics.drawCenteredString(g2, "Level 5", rect, 80f);
+      Inf101Graphics.drawCenteredString(g2, "NIVÅ 1", rect, 80f);
       startLevel5 = true;
     }
   }
@@ -126,7 +136,7 @@ public class QuizView implements ViewableQuizModel {
       Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.start);
       inputBox.drawInputBox();
       }
-    if (this.start > 159f){
+    if (this.start > 199f){
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.end);
       gamestate = GameState.GAME_OVER;
