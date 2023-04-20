@@ -67,6 +67,11 @@ public class DrawView extends JPanel {
       this.gamestate = quizScreen.getGameState();
       repaint();
     }
+    
+    if (gamestate == GameState.GAME_OVER){
+      drawGameOver(g2);
+      repaint();
+    }
 
   }
 
@@ -75,22 +80,38 @@ public class DrawView extends JPanel {
       Rectangle2D rect = this.getRectangle();
       g2.setColor(Color.BLACK);
       g2.draw(rect);
+      
     }
+  
+  private void drawGameOver(Graphics2D g2){
+      Rectangle2D rect = this.getRectangle();
+      g2.setColor(Color.BLACK);
+      g2.draw(rect);
+      g2.fill(rect);
+
+      Color dimGray = new Color(128, 128, 128, 64);
+      g2.setColor(dimGray);
+      String lastWord = quizScreen.getLastWord();
+      Inf101Graphics.drawCenteredString(g2, lastWord, rect, this.end);
+
+      g2.setColor(Color.RED);
+      Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, this.end);
+      
+      
+    }
+  
 
   private void drawTitleScreen(Graphics2D g2){
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
       button = titleScreen.getButton();
-      titleScreen.draw(g2, this.getRectangle(), color);
-    
+      titleScreen.draw(g2, this.getRectangle(), color);  
   }
 
   private void drawQuiz(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     quizScreen.draw(g2, rect);
-    
-  
-
   }
+
   
   private Rectangle2D getRectangle() {
     return new Rectangle2D.Double(50, 50, getWidth() - 100, getHeight() - 100);

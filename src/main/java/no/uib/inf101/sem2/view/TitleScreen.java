@@ -83,7 +83,6 @@ public class TitleScreen implements ViewableQuizModel{
     return this.button;
   }
   
-
   public boolean continueIsPressed(){
     return this.continueIsPressed;
   }

@@ -5,7 +5,6 @@ import no.uib.inf101.sem2.model.QuizModel;
 import no.uib.inf101.sem2.model.QuizWordFactory;
 import no.uib.inf101.sem2.view.DrawView;
 
-import java.awt.Frame;
 
 import javax.swing.JFrame;
 

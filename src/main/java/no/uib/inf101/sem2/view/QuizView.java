@@ -82,21 +82,14 @@ public class QuizView implements ViewableQuizModel {
     g2.setColor(Color.WHITE);
 
     drawCountdown(g2, rect);
+    drawQuizStage(g2, rect);
 
-    if (startLevel5){
-      stageCounter = 1;
-    }
-    
-    if (countdown <-1){
-      Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.start);
-      inputBox.drawInputBox();
-      }
-    if (this.start > 179f){
-      g2.setColor(Color.RED);
-      Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.end);
-        }
     
     }
+  
+  public String getLastWord(){
+    return currentQuestion;
+  }
   
   
   private void countDown(){
@@ -128,7 +121,18 @@ public class QuizView implements ViewableQuizModel {
     }
   }
 
+  private void drawQuizStage(Graphics2D g2, Rectangle2D rect){
+    if (countdown <-1){
+      Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.start);
+      inputBox.drawInputBox();
+      }
+    if (this.start > 179f){
+      g2.setColor(Color.RED);
+      Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.end);
+      gamestate = GameState.GAME_OVER;
+        }
 
+  }
 
   
 }

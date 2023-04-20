@@ -39,11 +39,7 @@ public class InputBox implements ActionListener {
         g2.setColor(color.WHITE);
         Inf101Graphics.drawCenteredString(g2, input, inputBox);
 
-        
     
-        // Initiate position of sunglasses image
-        //int y = (int) (g2.getClipBounds().getHeight() / 2.8 - sunglasses.getHeight() / 2);
-        //g2.drawImage(sunglasses, this.x, y, null);
       }
     
     public void glideInputBox(){
@@ -51,7 +47,7 @@ public class InputBox implements ActionListener {
         if (x == width){
 
         }
-        
+        //HELP
         }
     
 
