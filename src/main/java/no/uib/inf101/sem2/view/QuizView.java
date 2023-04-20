@@ -75,7 +75,7 @@ public class QuizView implements ViewableQuizModel {
   }
 
   public void draw(Graphics2D g2, Rectangle2D rect) {
-    inputBox = new InputBox(g2, rect, currentAnswer);
+    inputBox = new InputBox(g2, rect, this.model.getInputAnswer());
     g2.setColor(Color.BLACK);
     g2.draw(rect);
     g2.fill(rect);

@@ -16,6 +16,8 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     private QuizWordFactory quizWordFactory;
 
     private String currentInput = "";   
+    private String currentQuestion;
+    private String currentAnswer;
 
 
     public QuizModel(QuizWordFactory quizWordFactory) {
@@ -60,6 +62,11 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     public ArrayList<QuizWord> getWordList(){
         return this.levelList;
     }
+    public String getInputAnswer(){
+        return currentInput;
+    }
+
+
 
     private void nextLevel(){
         if ((levelList.size() == 0 && this.level <= 5) || level == 0){
