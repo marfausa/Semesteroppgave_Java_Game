@@ -36,8 +36,8 @@ public class QuizView implements ViewableQuizModel {
   
   int stageCounter;
   int countdown = 4;
-  float start = 60f;
-  float end = 180f;
+  float start = 40f;
+  float end = 160f;
   
   public QuizView(int pw, int ph, QuizModel model) {
     PANEL_WIDTH = pw;
@@ -126,7 +126,7 @@ public class QuizView implements ViewableQuizModel {
       Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.start);
       inputBox.drawInputBox();
       }
-    if (this.start > 179f){
+    if (this.start > 159f){
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, currentQuestion, rect, this.end);
       gamestate = GameState.GAME_OVER;

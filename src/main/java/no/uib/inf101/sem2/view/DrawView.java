@@ -32,8 +32,8 @@ public class DrawView extends JPanel {
   private boolean mouseIsPressed = false;
 
 
-  float start = 60f;
-  float end = 180f;
+  float start = 40f;
+  float end = 160f;
   
   public DrawView(QuizModel model) {
     this.model = model;
@@ -95,7 +95,7 @@ public class DrawView extends JPanel {
       Inf101Graphics.drawCenteredString(g2, lastWord, rect, this.end);
 
       g2.setColor(Color.RED);
-      Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, this.end);
+      Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, 180f);
       
       
     }
