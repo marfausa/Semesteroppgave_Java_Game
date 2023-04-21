@@ -148,6 +148,11 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     public void reset() {
         this.quizWordFactory = new QuizWordFactory();
 
+        this.level = 0;
+        this.stageCounter = 1;
+        this.userTries += 1;
+        this.answeredCorrect = 0;
+        
         this.gameState = GameState.ACTIVE_GAME;
         this.levelList = new ArrayList<>();
         startLevel();
@@ -158,10 +163,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.currentInput = "";   
         this.wrongAnswers = null;
 
-        this.level = 0;
-        this.stageCounter = 1;
-        this.userTries += 1;
-        this.answeredCorrect = 0;
+        
     }
     }
 

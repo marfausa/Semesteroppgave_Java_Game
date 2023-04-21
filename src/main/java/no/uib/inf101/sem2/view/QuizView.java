@@ -99,10 +99,19 @@ public class QuizView implements ViewableQuizModel {
     }
 
     drawAmountofQuestions(g2, rect);
-    if (stageCounter > 0 && stageCounter <= 5){
+    if (model.getCurrentLevel() == 1 ){
       drawQuizStage(g2, rect);
     }
-    if (stageCounter > 5 && stageCounter == 2){
+    if (model.getCurrentLevel() == 2 ){
+      drawQuizStage(g2, rect);
+    }
+    if (model.getCurrentLevel() == 3 ){
+      drawQuizStage(g2, rect);
+    }
+    if (model.getCurrentLevel() == 4 ){
+      drawQuizStage(g2, rect);
+    }
+    if (model.getCurrentLevel() == 5 ){
       drawQuizStage(g2, rect);
     }
     
