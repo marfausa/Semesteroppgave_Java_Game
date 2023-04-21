@@ -108,6 +108,7 @@ public class QuizView implements ViewableQuizModel {
       stageContinue = drawQuizStage(g2, rect);
       if (stageContinue){
         stageContinue = drawQuizStage(g2, rect);
+        this.numQuestions -= 1;
         this.start = 60f;
     
       }
@@ -162,8 +163,8 @@ public class QuizView implements ViewableQuizModel {
       if (wrongInput != null && !wrongInput.equalsIgnoreCase(model.getCurrentAnswer())){
         wrongAnswer = true;
       }
-
-      if ( wrongAnswer){
+  
+      if ( wrongAnswer && wrongInput != null){
         drawWrongAnswers(g2, rect, wrongInput);
       }
     }
