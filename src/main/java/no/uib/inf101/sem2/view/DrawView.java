@@ -20,6 +20,7 @@ import no.uib.inf101.sem2.model.QuizModel;
 
 public class DrawView extends JPanel {
 
+  QuizModel newModel;
   private QuizModel model;
   final int PANEL_WIDTH = 1200;
   final int PANEL_HEIGHT = 800;
@@ -32,21 +33,22 @@ public class DrawView extends JPanel {
 
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
-
+  
 
   float start = 60f;
   float end = 240f;
   
   public DrawView(QuizModel model) {
+    this.newModel = model;
     this.model = model;
     this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
     this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     this.setupMousePositionUpdater();
     this.setupMousePressedUpdater();
     
-    titleScreen = new TitleScreen(PANEL_WIDTH);
-    quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model, 4);
-    gameOverScreen = new GameOver(PANEL_WIDTH);
+    this.titleScreen = new TitleScreen(PANEL_WIDTH);
+    this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, getModel(), 4);
+    this.gameOverScreen = new GameOver(PANEL_WIDTH);
   
     }
       
@@ -57,41 +59,42 @@ public class DrawView extends JPanel {
     Graphics2D g2 = (Graphics2D) g;
     drawFrame(g2);
 
-    
-
-    if (gamestate == GameState.TITLE_SCREEN){
-      drawTitleScreen(g2);
-      this.gamestate = titleScreen.getGameState();
-      repaint();
-    }
-
-    else if (gamestate == GameState.ACTIVE_GAME){
-      quizScreen.startTimer();
-      drawQuiz(g2);
-      this.gamestate = quizScreen.getGameState();
-      repaint();
-    }
-    
-    else if (gamestate == GameState.GAME_OVER){
-      drawGameOver(g2);
-      repaint();
-    }
-
-    if (gameOverScreen.continueIsPressed()){
-      this.gamestate = GameState.ACTIVE_GAME;
-      quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model, 4);
-      drawQuiz(g2);
-      repaint();
-    }
-
+  
   }
 
-
+  public QuizModel getModel(){
+    return newModel;
+  }
   private void drawFrame(Graphics2D g2){
       Rectangle2D rect = this.getRectangle();
       g2.setColor(Color.BLACK);
       g2.draw(rect);
       g2.clip(rect);
+
+      if (gamestate == GameState.TITLE_SCREEN){
+        drawTitleScreen(g2);
+        this.gamestate = titleScreen.getGameState();
+        repaint();
+      }
+  
+      if (gameOverScreen.continueIsPressed()){
+        this.gamestate = GameState.ACTIVE_GAME;
+        gameOverScreen.pressContinue(false);
+        newGame(g2);
+        repaint();
+        
+      }
+      else if (gamestate == GameState.ACTIVE_GAME){
+        drawQuiz(g2);
+        this.gamestate = quizScreen.getGameState();
+        repaint();
+      }
+      
+      else if (gamestate == GameState.GAME_OVER){
+        drawGameOver(g2);
+        repaint();
+      }
+      
       
     }
   
@@ -99,12 +102,22 @@ public class DrawView extends JPanel {
       button = titleScreen.getButton();
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
       button = titleScreen.getButton();
-      titleScreen.draw(g2, this.getRectangle(), color);  
+      this.titleScreen.draw(g2, this.getRectangle(), color);  
   }
 
   private void drawQuiz(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
-    quizScreen.draw(g2, rect);
+    
+    this.quizScreen.startTimer();
+    this.quizScreen.draw(g2, rect);
+  }
+
+  private void newGame(Graphics2D g2){
+    Rectangle2D rect = this.getRectangle();
+    
+    this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, getModel(), 4);
+    this.quizScreen.startTimer();
+    this.quizScreen.draw(g2, rect);
   }
 
   private void drawGameOver(Graphics2D g2){

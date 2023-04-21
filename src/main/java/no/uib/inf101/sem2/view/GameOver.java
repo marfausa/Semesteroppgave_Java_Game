@@ -54,9 +54,9 @@ public class GameOver implements ViewableQuizModel{
       Inf101Graphics.drawCenteredString(g2, "Freista på nytt?", button);
       
 
-      if (startIsPressed) {
+      if (continueIsPressed()) {
         button = new Rectangle2D.Double();
-        gamestate = GameState.ACTIVE_GAME;
+        
       }
     }
   }
@@ -70,12 +70,6 @@ public class GameOver implements ViewableQuizModel{
     return this.continueIsPressed;
   }
   
-  public boolean startIsPressed(){
-    return this.startIsPressed;
-  }
-  public void pressStart(boolean bool){
-    this.startIsPressed = bool;
-  }
   public void pressContinue(boolean bool){
     this.continueIsPressed = bool;
   }
