@@ -137,9 +137,19 @@ public class DrawView extends JPanel {
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, 180f);
 
+      g2.setColor(Color.WHITE);
+      g2.setFont(new Font("Helvetica", Font.PLAIN, 50));
+      g2.drawString("Korrekt omsetjing: ", 100, 140);
+
+      g2.setColor(Color.PINK);
+      g2.setFont(new Font("Helvetica", Font.ITALIC, 40));
+      g2.drawString(model.getCurrentAnswer() , 150, 220);
+      
+      
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
 
       gameOverScreen.draw(g2, rect, color);
+
       
       
     }

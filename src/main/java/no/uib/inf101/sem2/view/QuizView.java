@@ -38,8 +38,9 @@ public class QuizView implements ViewableQuizModel {
   
   
   int numQuestions = 25;
-  int stageCounter = 1;
+  int stageCounter = 0;
   int countdown;
+  int stageInterval = 0;
 
   boolean wrongAnswer;
   boolean correctAnswer;
@@ -67,7 +68,9 @@ public class QuizView implements ViewableQuizModel {
     countDown();
     if (startedQuiz){
       timer.setDelay(1);
+      if (stageInterval == -2){
       expandingWord();
+      }
     }
     if (gamestate == GameState.GAME_OVER){
       timer.stop();
@@ -105,6 +108,8 @@ public class QuizView implements ViewableQuizModel {
       stageContinue = drawQuizStage(g2, rect);
       if (stageContinue){
         stageContinue = drawQuizStage(g2, rect);
+        this.start = 60f;
+    
       }
     }
     if (model.getCurrentLevel() == 2 ){
@@ -124,8 +129,12 @@ public class QuizView implements ViewableQuizModel {
 
   private boolean drawQuizStage(Graphics2D g2, Rectangle2D rect){
     String correctInput = model.getCorrectUserAnswer();
+    
+    if (this.countdown == -2){
+      stageInterval = this.countdown;
+    }
 
-    if (countdown <-1){
+    if (stageInterval == -2){
          Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
          inputBox.drawInputBox();  
     }

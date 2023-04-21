@@ -52,6 +52,7 @@ public class GameOver implements ViewableQuizModel{
       g2.draw(button);
       
       Inf101Graphics.drawCenteredString(g2, "Freista på nytt?", button);
+     
       
 
       if (continueIsPressed()) {
