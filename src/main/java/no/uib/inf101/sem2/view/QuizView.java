@@ -39,14 +39,14 @@ public class QuizView implements ViewableQuizModel {
   
   int numQuestions = 20;
   int stageCounter = 1;
-  int countdown = 4;
+  int countdown;
   boolean wrongAnswer;
   boolean correctAnswer;
 
   float start = 60f;
   float end = 240f;
   
-  public QuizView(int pw, int ph, QuizModel model) {
+  public QuizView(int pw, int ph, QuizModel model, int tick) {
     PANEL_WIDTH = pw;
     PANEL_HEIGHT = ph;
 
@@ -55,6 +55,7 @@ public class QuizView implements ViewableQuizModel {
     currentQuestion = this.model.getCurrentQuestion();
     currentAnswer = this.model.getCurrentAnswer();
     
+    countdown = tick;
     timer = new Timer(1000, this);
     
     }
@@ -177,6 +178,7 @@ public class QuizView implements ViewableQuizModel {
         g2.setColor(Color.RED);
         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
         gamestate = GameState.GAME_OVER;
+        timer.stop();
        
       } else if (stageCounter < model.getStageProgression()){
         stageCounter +=1;

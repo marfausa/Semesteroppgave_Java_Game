@@ -48,13 +48,11 @@ public class GameOver implements ViewableQuizModel{
       Color fillButton = Color.CYAN;
       Color color = hoverColor;
       button = new Rectangle2D.Double(rect.getCenterX()-150, rect.getY() * 11.5, 300, 100);
-      g2.setColor(fillButton);
+      g2.setColor(color);
       g2.draw(button);
       
-      double midX = rect.getBounds2D().getCenterX();
-      
       Inf101Graphics.drawCenteredString(g2, "Freista på nytt?", button);
-    
+      
 
       if (startIsPressed) {
         button = new Rectangle2D.Double();

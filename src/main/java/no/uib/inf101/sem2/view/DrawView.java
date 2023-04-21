@@ -45,7 +45,7 @@ public class DrawView extends JPanel {
     this.setupMousePressedUpdater();
     
     titleScreen = new TitleScreen(PANEL_WIDTH);
-    quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model);
+    quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model, 4);
     gameOverScreen = new GameOver(PANEL_WIDTH);
   
     }
@@ -57,7 +57,7 @@ public class DrawView extends JPanel {
     Graphics2D g2 = (Graphics2D) g;
     drawFrame(g2);
 
-
+    
 
     if (gamestate == GameState.TITLE_SCREEN){
       drawTitleScreen(g2);
@@ -77,6 +77,13 @@ public class DrawView extends JPanel {
       repaint();
     }
 
+    if (gameOverScreen.continueIsPressed()){
+      this.gamestate = GameState.ACTIVE_GAME;
+      quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model, 4);
+      drawQuiz(g2);
+      repaint();
+    }
+
   }
 
 
@@ -88,8 +95,22 @@ public class DrawView extends JPanel {
       
     }
   
+  private void drawTitleScreen(Graphics2D g2){
+      button = titleScreen.getButton();
+      Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
+      button = titleScreen.getButton();
+      titleScreen.draw(g2, this.getRectangle(), color);  
+  }
+
+  private void drawQuiz(Graphics2D g2){
+    Rectangle2D rect = this.getRectangle();
+    quizScreen.draw(g2, rect);
+  }
+
   private void drawGameOver(Graphics2D g2){
       Rectangle2D rect = this.getRectangle();
+      button = gameOverScreen.getButton();
+
       g2.setColor(Color.BLACK);
       g2.draw(rect);
       g2.fill(rect);
@@ -102,24 +123,13 @@ public class DrawView extends JPanel {
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, 180f);
 
-      Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
+      Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
 
       gameOverScreen.draw(g2, rect, color);
       
       
     }
   
-
-  private void drawTitleScreen(Graphics2D g2){
-      Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
-      titleScreen.draw(g2, this.getRectangle(), color);  
-  }
-
-  private void drawQuiz(Graphics2D g2){
-    Rectangle2D rect = this.getRectangle();
-    quizScreen.draw(g2, rect);
-  }
-
   
   private Rectangle2D getRectangle() {
     return new Rectangle2D.Double(50, 50, getWidth() - 100, getHeight() - 100);
@@ -127,47 +137,27 @@ public class DrawView extends JPanel {
 
   private void setupMousePositionUpdater() {
     // Keep the mousePosition variable up to date
-    if (gamestate == GameState.TITLE_SCREEN){
     this.addMouseMotionListener(new MouseMotionAdapter() {
       @Override
       public void mouseMoved(MouseEvent e) {
-        mouseIsInTheRectangle = titleScreen.getButton().contains(e.getPoint());
+        mouseIsInTheRectangle = button.contains(e.getPoint());
         updateCursor();
         repaint();
       }
     });
   }
-  else if (gamestate == GameState.GAME_OVER){
-    this.addMouseMotionListener(new MouseMotionAdapter() {
-      @Override
-      public void mouseMoved(MouseEvent e) {
-        mouseIsInTheRectangle = gameOverScreen.getButton().contains(e.getPoint());
-        updateCursor();
-        repaint();
-      }
-    });
-  }
-}
+
 
   private void updateCursor() {
-    if (gamestate == GameState.TITLE_SCREEN ){
       if (mouseIsInTheRectangle) {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
       } else {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
       }
     }
-    else if ( gamestate == GameState.GAME_OVER){
-      if (mouseIsInTheRectangle) {
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-      } else {
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-      }
-    }
-  }
+  
 
   private void setupMousePressedUpdater() {
-    if (gamestate == GameState.TITLE_SCREEN || gamestate == GameState.GAME_OVER){
       this.addMouseListener(new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
@@ -201,7 +191,6 @@ public class DrawView extends JPanel {
           }
         }
     });
-  }
   
 
   }
