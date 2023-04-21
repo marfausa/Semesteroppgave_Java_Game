@@ -37,7 +37,7 @@ public class QuizView implements ViewableQuizModel {
   boolean startLevel1 = false;
   
   
-  int numQuestions = 20;
+  int numQuestions = 25;
   int stageCounter = 1;
   int countdown;
 
@@ -94,22 +94,22 @@ public class QuizView implements ViewableQuizModel {
     g2.fill(rect);
     g2.setColor(Color.WHITE);
 
-    if (numQuestions == 20){
+    if (numQuestions == 25){
         drawCountdown(g2, rect);
     }
 
-    drawAmountCorrectAnswers(g2, rect);
-    if (stageCounter ==1){
+    drawAmountofQuestions(g2, rect);
+    if (stageCounter > 0 && stageCounter <= 5){
       drawQuizStage(g2, rect);
     }
-    if (stageCounter == 2){
+    if (stageCounter > 5 && stageCounter == 2){
       drawQuizStage(g2, rect);
     }
     
 
     
   }
-  public void drawAmountCorrectAnswers(Graphics2D g2, Rectangle2D rect){
+  public void drawAmountofQuestions(Graphics2D g2, Rectangle2D rect){
     if (startedQuiz){
       g2.setColor(Color.WHITE);
       g2.setFont(new Font("Arial", Font.PLAIN, 24));

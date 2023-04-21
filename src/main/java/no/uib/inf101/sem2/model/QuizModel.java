@@ -71,6 +71,33 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
 
     }
 
+    @Override
+    public void startLevel(){
+        if ((levelList.size() == 0 && this.level < 5) || level == 0){
+            this.level +=1;
+            this.levelList = this.quizWordFactory.GetNewQuizWords(level);
+        }
+    }
+
+
+    @Override
+    public int getCurrentLevel() {
+        if (this.level >0 && this.level <= 5) {
+            return 1;
+        } else if (this.level > 5 && this.level <= 10) {
+            return 2;
+        } else if (this.level >10 && this.level <= 15) {
+            return 3;
+        } else if (this.level >15 && this.level <= 20) {
+            return 4;
+        } else if (this.level >20 && this.level <= 25) {
+            return 5;
+        } else {
+            return 0;
+        }
+    }
+   
+
 
     public QuizWord getCurrentWord(){
         if (levelList.size() >0){
@@ -116,22 +143,6 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.gameState = gs;
     }
 
-    @Override
-    public void startLevel(){
-        if ((levelList.size() == 0 && this.level <= 5) || level == 0){
-            this.level +=1;
-            this.levelList = this.quizWordFactory.GetNewQuizWords(level);
-        }
-    }
-
-    public void level1(){
-
-    }
-
-    @Override
-    public int getCurrentLevel() {
-        return this.level;
-    }
    
 
     public void reset() {
