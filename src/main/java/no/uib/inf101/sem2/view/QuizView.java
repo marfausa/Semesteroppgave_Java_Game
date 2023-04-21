@@ -30,17 +30,12 @@ public class QuizView implements ViewableQuizModel {
   boolean startCountdown = false;
   boolean startedQuiz = false;
   
-  boolean startLevel5 = false;
-  boolean startLevel4 = false;
-  boolean startLevel3 = false;
-  boolean startLevel2 = false;
-  boolean startLevel1 = false;
-  
   
   int numQuestions = 25;
   int stageCounter = 0;
   int countdown;
   int stageInterval = 0;
+  int level = 1;
 
   boolean wrongAnswer;
   boolean correctAnswer;
@@ -69,7 +64,7 @@ public class QuizView implements ViewableQuizModel {
     if (startedQuiz){
       timer.setDelay(1);
       if (stageInterval == -2){
-      expandingWord();
+        expandingWord();
       }
     }
     if (gamestate == GameState.GAME_OVER){
@@ -103,7 +98,7 @@ public class QuizView implements ViewableQuizModel {
 
     boolean stageContinue = true;
 
-    if (model.getCurrentLevel() == 1 ){
+    if (this.level == 1 ){
       stageContinue = drawQuizStage(g2, rect);
       if (stageContinue){
         stageContinue = drawQuizStage(g2, rect);
@@ -191,8 +186,9 @@ public class QuizView implements ViewableQuizModel {
     }
 
     if (countdown ==-1){
+      if (this.level == 1)
       Inf101Graphics.drawCenteredString(g2, "NIVÅ 1", rect, 80f);
-      startLevel1 = true;
+      
     }
   }
   

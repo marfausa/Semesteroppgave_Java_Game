@@ -43,7 +43,7 @@ public class QuizModelTest{
     //Level 2
     model.nextStage();
     assertEquals(2,model.getCurrentLevel());
-    
+
     assertEquals(4,model.levelList.size());
     model.nextStage();
     assertEquals(3,model.levelList.size());
@@ -55,6 +55,8 @@ public class QuizModelTest{
 
     //Level 3
     model.nextStage();
+    assertEquals(3,model.getCurrentLevel());
+    
     assertEquals(4,model.levelList.size());
     model.nextStage();
     assertEquals(3,model.levelList.size());
@@ -66,6 +68,7 @@ public class QuizModelTest{
 
     //Level 4
     model.nextStage();
+    assertEquals(4,model.getCurrentLevel());
     assertEquals(4,model.levelList.size());
     model.nextStage();
     assertEquals(3,model.levelList.size());
@@ -77,6 +80,7 @@ public class QuizModelTest{
 
     //Level 5
     model.nextStage();
+    assertEquals(5,model.getCurrentLevel());
     assertEquals(4,model.levelList.size());
     model.nextStage();
     assertEquals(3,model.levelList.size());

@@ -87,15 +87,15 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
 
     @Override
     public int getCurrentLevel() {
-        if (this.level >0 && this.level <= 5) {
+        if (this.level == 1) {
             return 1;
-        } else if (this.level > 5 && this.level <= 10) {
+        } else if (this.level == 2) {
             return 2;
-        } else if (this.level >10 && this.level <= 15) {
+        } else if (this.level == 3) {
             return 3;
-        } else if (this.level >15 && this.level <= 20) {
+        } else if (this.level == 4) {
             return 4;
-        } else if (this.level >20 && this.level <= 25) {
+        } else if (this.level == 5) {
             return 5;
         } else {
             return 0;
@@ -149,6 +149,10 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
 
     public void updateGameState(GameState gs){
         this.gameState = gs;
+    }
+
+    public int getWordsLeftInLevel(){
+        return this.levelList.size();
     }
 
    
