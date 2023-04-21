@@ -12,6 +12,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     private ArrayList<QuizWord> levelList;
     private int level = 0;
     private int stageCounter = 1;
+    private int userTries = 0;
 
     private QuizWord currentQuizWord; // I staden for eigen klasse, gjerne string?
     private QuizWordFactory quizWordFactory;
@@ -24,8 +25,8 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     private int answeredCorrect = 0;
 
 
-    public QuizModel(QuizWordFactory quizWordFactory) {
-        this.quizWordFactory = quizWordFactory;
+    public QuizModel() {
+        this.quizWordFactory = new QuizWordFactory();
         this.gameState = GameState.ACTIVE_GAME;
         this.levelList = new ArrayList<>();
         startLevel();
@@ -111,6 +112,10 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         return stageCounter;
     }
 
+    public void updateGameState(GameState gs){
+        this.gameState = gs;
+    }
+
     @Override
     public void startLevel(){
         if ((levelList.size() == 0 && this.level <= 5) || level == 0){
@@ -128,6 +133,25 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         return this.level;
     }
    
+
+    public void reset() {
+        this.quizWordFactory = new QuizWordFactory();
+
+        this.gameState = GameState.ACTIVE_GAME;
+        this.levelList = new ArrayList<>();
+        startLevel();
+        
+        this.currentQuizWord = getCurrentWord();
+        this.currentQuestion = this.currentQuizWord.getQuestion();
+        this.currentAnswer = this.currentQuizWord.getAnswer();
+        this.currentInput = "";   
+        this.wrongAnswers = null;
+
+        this.level = 0;
+        this.stageCounter = 1;
+        this.userTries += 1;
+        this.answeredCorrect = 0;
+    }
     }
 
 

@@ -10,9 +10,8 @@ import javax.swing.JFrame;
 
 public class Main {
   public static void main(String[] args) {
-    QuizWordFactory quizWordFactory = new QuizWordFactory();
 
-    QuizModel model = new QuizModel(quizWordFactory);
+    QuizModel model = new QuizModel();
     DrawView view = new DrawView(model);
 
     QuizController quizController = new QuizController(model, view);

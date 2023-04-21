@@ -115,7 +115,8 @@ public class DrawView extends JPanel {
   private void newGame(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     
-    this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, getModel(), 4);
+    this.model.reset();
+    this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model, 4);
     this.quizScreen.startTimer();
     this.quizScreen.draw(g2, rect);
   }
