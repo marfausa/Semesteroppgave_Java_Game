@@ -131,8 +131,7 @@ public class DrawView extends JPanel {
 
       Color dimGray = new Color(128, 128, 128, 64);
       g2.setColor(dimGray);
-      String lastWord = quizScreen.getLastWord();
-      Inf101Graphics.drawCenteredString(g2, lastWord, rect, this.end);
+      Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
 
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, 180f);
