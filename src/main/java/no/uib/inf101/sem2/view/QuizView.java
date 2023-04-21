@@ -53,8 +53,8 @@ public class QuizView implements ViewableQuizModel {
 
     this.model = model;
     gamestate = this.model.getGameState();
-    currentQuestion = this.model.getCurrentQuestion();
-    currentAnswer = this.model.getCurrentAnswer();
+    this.currentQuestion = this.model.getCurrentQuestion();
+    this.currentAnswer = this.model.getCurrentAnswer();
     
     countdown = tick;
     timer = new Timer(1000, this);
@@ -97,10 +97,15 @@ public class QuizView implements ViewableQuizModel {
     if (numQuestions == 25){
         drawCountdown(g2, rect);
     }
-
     drawAmountofQuestions(g2, rect);
+
+    boolean stageContinue = true;
+
     if (model.getCurrentLevel() == 1 ){
-      drawQuizStage(g2, rect);
+      stageContinue = drawQuizStage(g2, rect);
+      if (stageContinue){
+        stageContinue = drawQuizStage(g2, rect);
+      }
     }
     if (model.getCurrentLevel() == 2 ){
       drawQuizStage(g2, rect);
@@ -115,26 +120,43 @@ public class QuizView implements ViewableQuizModel {
       drawQuizStage(g2, rect);
     }
     
-
-    
   }
+
+  private boolean drawQuizStage(Graphics2D g2, Rectangle2D rect){
+    String correctInput = model.getCorrectUserAnswer();
+
+    if (countdown <-1){
+         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
+         inputBox.drawInputBox();  
+    }
+    if (this.start > 239f){
+         g2.setColor(Color.RED);
+         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
+         gamestate = GameState.GAME_OVER;   
+    } else if (correctInput != null && correctInput.equalsIgnoreCase(model.getCurrentAnswer())){
+      this.model.nextStage();
+      return true;
+    }
+    return false;
+  }
+
+
+
+   
   public void drawAmountofQuestions(Graphics2D g2, Rectangle2D rect){
     if (startedQuiz){
       g2.setColor(Color.WHITE);
       g2.setFont(new Font("Arial", Font.PLAIN, 24));
       g2.drawString("Resterande oppgåver: " + numQuestions, 80, 100);
 
-      String wrongInput = model.getWrongAnswer();
+      String wrongInput = model.getWrongUserAnswer();
       if (wrongInput != null && !wrongInput.equalsIgnoreCase(model.getCurrentAnswer())){
         wrongAnswer = true;
       }
 
       if ( wrongAnswer){
         drawWrongAnswers(g2, rect, wrongInput);
-      } else {
-        correctAnswer = true;
       }
-      
     }
   }
 
@@ -180,32 +202,6 @@ public class QuizView implements ViewableQuizModel {
       startLevel1 = true;
     }
   }
-
-  private void drawQuizStage(Graphics2D g2, Rectangle2D rect){
-
-   if (countdown <-1){
-        Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
-        inputBox.drawInputBox();
-      
-   }
-   if (this.start > 239f){
-        g2.setColor(Color.RED);
-        Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
-        gamestate = GameState.GAME_OVER;
-        
-       
-      } else if (stageCounter < model.getStageProgression()){
-        stageCounter +=1;
-        numQuestions -= 1;
-        countdown = 0;
-        currentQuestion = model.getCurrentQuestion();
-        currentAnswer = model.getCurrentAnswer();
-      } 
-        
-    
-
-  }
-
   
 }
 

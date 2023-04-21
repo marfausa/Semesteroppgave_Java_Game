@@ -20,7 +20,9 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     private String currentInput = "";   
     private String currentQuestion;
     private String currentAnswer;
+
     private String wrongAnswers;
+    private String correctAnswers;
 
     private int answeredCorrect = 0;
 
@@ -55,28 +57,23 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     @Override
     public boolean inputCheckAnswer(String input) {
         if (input.equalsIgnoreCase(this.currentAnswer)){
-            getNextWord();
+            this.correctAnswers = input;
             return true;
         } else{
             this.wrongAnswers = input;
             return false;
         }
     }
-    
+
 
     @Override
-    public void getNextWord(){
-        this.currentQuizWord = getCurrentWord();
-        this.stageCounter +=1;
-
-    }
-
-    @Override
-    public void startLevel(){
+    public boolean startLevel(){
         if ((levelList.size() == 0 && this.level < 5) || level == 0){
             this.level +=1;
             this.levelList = this.quizWordFactory.GetNewQuizWords(level);
+            return true;
         }
+        return false;
     }
 
 
@@ -123,8 +120,11 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         return currentInput;
     }
 
-    public String getWrongAnswer(){
+    public String getWrongUserAnswer(){
         return wrongAnswers;
+    }
+    public String getCorrectUserAnswer(){
+        return correctAnswers;
     }
 
     public String getCurrentQuestion(){
@@ -165,6 +165,23 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
 
         
     }
+    public void nextStage(){
+        this.stageCounter += 1;
+        this.answeredCorrect += 1;
+
+        startLevel();
+
+        this.currentQuizWord = getCurrentWord();
+        this.currentQuestion = this.currentQuizWord.getQuestion();
+        this.currentAnswer = this.currentQuizWord.getAnswer();
+        this.currentInput = "";   
+        this.wrongAnswers = null;
+    
+
+        }
+
+
+    
     }
 
 
