@@ -28,6 +28,7 @@ public class DrawView extends JPanel {
   GameState gamestate = GameState.TITLE_SCREEN;
   TitleScreen titleScreen;
   QuizView quizScreen;
+  GameOver gameOverScreen;
 
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
@@ -45,6 +46,7 @@ public class DrawView extends JPanel {
     
     titleScreen = new TitleScreen(PANEL_WIDTH);
     quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model);
+    gameOverScreen = new GameOver(PANEL_WIDTH);
   
     }
       
@@ -70,7 +72,7 @@ public class DrawView extends JPanel {
       repaint();
     }
     
-    if (gamestate == GameState.GAME_OVER){
+    else if (gamestate == GameState.GAME_OVER){
       drawGameOver(g2);
       repaint();
     }
@@ -99,6 +101,10 @@ public class DrawView extends JPanel {
 
       g2.setColor(Color.RED);
       Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, 180f);
+
+      Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
+
+      gameOverScreen.draw(g2, rect, color);
       
       
     }
@@ -106,7 +112,6 @@ public class DrawView extends JPanel {
 
   private void drawTitleScreen(Graphics2D g2){
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
-      button = titleScreen.getButton();
       titleScreen.draw(g2, this.getRectangle(), color);  
   }
 
@@ -122,18 +127,37 @@ public class DrawView extends JPanel {
 
   private void setupMousePositionUpdater() {
     // Keep the mousePosition variable up to date
+    if (gamestate == GameState.TITLE_SCREEN){
     this.addMouseMotionListener(new MouseMotionAdapter() {
       @Override
       public void mouseMoved(MouseEvent e) {
-        mouseIsInTheRectangle = button.contains(e.getPoint());
+        mouseIsInTheRectangle = titleScreen.getButton().contains(e.getPoint());
         updateCursor();
         repaint();
       }
     });
   }
+  else if (gamestate == GameState.GAME_OVER){
+    this.addMouseMotionListener(new MouseMotionAdapter() {
+      @Override
+      public void mouseMoved(MouseEvent e) {
+        mouseIsInTheRectangle = gameOverScreen.getButton().contains(e.getPoint());
+        updateCursor();
+        repaint();
+      }
+    });
+  }
+}
 
   private void updateCursor() {
-    if (gamestate == GameState.TITLE_SCREEN){
+    if (gamestate == GameState.TITLE_SCREEN ){
+      if (mouseIsInTheRectangle) {
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+      } else {
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+      }
+    }
+    else if ( gamestate == GameState.GAME_OVER){
       if (mouseIsInTheRectangle) {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
       } else {
@@ -143,31 +167,42 @@ public class DrawView extends JPanel {
   }
 
   private void setupMousePressedUpdater() {
-    if (gamestate == GameState.TITLE_SCREEN){
+    if (gamestate == GameState.TITLE_SCREEN || gamestate == GameState.GAME_OVER){
       this.addMouseListener(new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
           mouseIsPressed = true;
           repaint();
         }
+
     
         @Override
         public void mouseReleased(MouseEvent e) {
           // Record that button is pressed
-          
-          if (mouseIsInTheRectangle && titleScreen.continueIsPressed()){
-            titleScreen.pressStart(true);
-          }
-          else if (mouseIsInTheRectangle && titleScreen.startIsPressed() == false ){
-            titleScreen.pressContinue(true);
-          }
-          mouseIsPressed = false;
+          if (gamestate == GameState.TITLE_SCREEN){
+            if (mouseIsInTheRectangle && titleScreen.continueIsPressed()){
+              titleScreen.pressStart(true);
+            }
+            else if (mouseIsInTheRectangle && titleScreen.startIsPressed() == false ){
+              titleScreen.pressContinue(true);
+            }
+            mouseIsPressed = false;
 
-          updateCursor();
-          repaint();
+            updateCursor();
+            repaint();
+          } else if (gamestate == GameState.GAME_OVER){
+              if (mouseIsInTheRectangle){
+                gameOverScreen.pressContinue(true);
+              }
+              mouseIsPressed = false;
+
+              updateCursor();
+              repaint();
+          }
         }
     });
   }
+  
 
   }
 

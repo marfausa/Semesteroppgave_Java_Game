@@ -21,6 +21,8 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     private String currentAnswer;
     private String wrongAnswers;
 
+    private int answeredCorrect = 0;
+
 
     public QuizModel(QuizWordFactory quizWordFactory) {
         this.quizWordFactory = quizWordFactory;
@@ -46,13 +48,13 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     @Override
     public void updateInputString(String input) {
         currentInput = input;
-        System.out.println(currentInput);
+
     }
 
     @Override
     public boolean inputCheckAnswer(String input) {
         if (input.equalsIgnoreCase(this.currentAnswer)){
-            getCurrentWord();
+            getNextWord();
             return true;
         } else{
             this.wrongAnswers = input;
@@ -103,6 +105,10 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
 
     public String getCurrentAnswer(){
         return this.currentAnswer;
+    }
+
+    public int getStageProgression(){
+        return stageCounter;
     }
 
     @Override

@@ -29,13 +29,16 @@ public class QuizView implements ViewableQuizModel {
 
   boolean startCountdown = false;
   boolean startedQuiz = false;
+  
   boolean startLevel5 = false;
   boolean startLevel4 = false;
   boolean startLevel3 = false;
   boolean startLevel2 = false;
   boolean startLevel1 = false;
   
-  int stageCounter = 20;
+  
+  int numQuestions = 20;
+  int stageCounter = 1;
   int countdown = 4;
   boolean wrongAnswer;
   boolean correctAnswer;
@@ -54,7 +57,6 @@ public class QuizView implements ViewableQuizModel {
     
     timer = new Timer(1000, this);
     
-
     }
 
       
@@ -86,9 +88,18 @@ public class QuizView implements ViewableQuizModel {
     g2.fill(rect);
     g2.setColor(Color.WHITE);
 
+    if (numQuestions == 20){
+        drawCountdown(g2, rect);
+    }
+
     drawAmountCorrectAnswers(g2, rect);
-    drawCountdown(g2, rect);
-    drawQuizStage(g2, rect);
+    if (stageCounter ==1){
+      drawQuizStage(g2, rect);
+    }
+    if (stageCounter == 2){
+      drawQuizStage(g2, rect);
+    }
+    
 
     
   }
@@ -96,7 +107,7 @@ public class QuizView implements ViewableQuizModel {
     if (startedQuiz){
       g2.setColor(Color.WHITE);
       g2.setFont(new Font("Arial", Font.PLAIN, 24));
-      g2.drawString("Resterande oppgåver: " + stageCounter, 80, 100);
+      g2.drawString("Resterande oppgåver: " + numQuestions, 80, 100);
 
       String wrongInput = model.getWrongAnswer();
       if (wrongInput != null && !wrongInput.equalsIgnoreCase(model.getCurrentAnswer())){
@@ -151,23 +162,30 @@ public class QuizView implements ViewableQuizModel {
 
     if (countdown ==-1){
       Inf101Graphics.drawCenteredString(g2, "NIVÅ 1", rect, 80f);
-      startLevel5 = true;
+      startLevel1 = true;
     }
   }
 
   private void drawQuizStage(Graphics2D g2, Rectangle2D rect){
-    if (countdown <-1){
-      Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
-      inputBox.drawInputBox();
-      }
-    if (correctAnswer){
 
-    }
-    if (this.start > 239f){
-      g2.setColor(Color.RED);
-      Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
-      gamestate = GameState.GAME_OVER;
-        }
+   if (countdown <-1){
+        Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
+        inputBox.drawInputBox();
+      
+   }
+   if (this.start > 239f){
+        g2.setColor(Color.RED);
+        Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
+        gamestate = GameState.GAME_OVER;
+       
+      } else if (stageCounter < model.getStageProgression()){
+        stageCounter +=1;
+        numQuestions -= 1;
+        countdown = 0;
+        currentQuestion = model.getCurrentQuestion();
+        currentAnswer = model.getCurrentAnswer();
+      } 
+        
     
 
   }
