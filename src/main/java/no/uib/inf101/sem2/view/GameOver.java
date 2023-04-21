@@ -29,7 +29,7 @@ public class GameOver implements ViewableQuizModel{
     timer = new Timer(4, this);
     timer.start();
   }
-  
+
   @Override
     public void actionPerformed(ActionEvent e) {
       if (countdown > 0){
@@ -47,9 +47,11 @@ public class GameOver implements ViewableQuizModel{
     if (countdown == 0){
       Color fillButton = Color.CYAN;
       Color color = hoverColor;
-      button = new Rectangle2D.Double(rect.getX() * 6  , rect.getY() * 12, 500, 100);
+      button = new Rectangle2D.Double(rect.getCenterX()-150, rect.getY() * 11.5, 300, 100);
       g2.setColor(fillButton);
       g2.draw(button);
+      
+      double midX = rect.getBounds2D().getCenterX();
       
       Inf101Graphics.drawCenteredString(g2, "Freista på nytt?", button);
     
