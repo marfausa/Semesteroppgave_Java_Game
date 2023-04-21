@@ -90,8 +90,7 @@ public class QuizView implements ViewableQuizModel {
 
   public void draw(Graphics2D g2, Rectangle2D rect) {
     inputBox = new InputBox(g2, rect, this.model.getInputAnswer());
-   // Font font = new Font("Serif", Font.BOLD, 24); // create a new font with size 24
-    //g2.setFont(font);
+ 
     g2.setColor(Color.BLACK);
     g2.draw(rect);
     g2.fill(rect);
@@ -112,18 +111,6 @@ public class QuizView implements ViewableQuizModel {
         this.start = 60f;
     
       }
-    }
-    if (model.getCurrentLevel() == 2 ){
-      drawQuizStage(g2, rect);
-    }
-    if (model.getCurrentLevel() == 3 ){
-      drawQuizStage(g2, rect);
-    }
-    if (model.getCurrentLevel() == 4 ){
-      drawQuizStage(g2, rect);
-    }
-    if (model.getCurrentLevel() == 5 ){
-      drawQuizStage(g2, rect);
     }
     
   }
@@ -177,10 +164,6 @@ public class QuizView implements ViewableQuizModel {
         g2.setColor(Color.WHITE);
       
     
-  }
-  
-  public String getLastWord(){
-    return currentQuestion;
   }
   
   

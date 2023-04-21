@@ -8,33 +8,41 @@ import no.uib.inf101.sem2.controller.ControllableQuizModel;
 import no.uib.inf101.sem2.view.ViewableQuizModel;
 
 public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
-    private GameState gameState;
-    private ArrayList<QuizWord> levelList;
-    private int level = 0;
-    private int stageCounter = 1;
-    private int userTries = 0;
+    public GameState gameState;
+    public ArrayList<QuizWord> levelList;
+    public int level = 0;
+    public int stageCounter = 1;
+    public int userTries = 0;
 
     private QuizWord currentQuizWord; // I staden for eigen klasse, gjerne string?
     private QuizWordFactory quizWordFactory;
 
-    private String currentInput = "";   
-    private String currentQuestion;
-    private String currentAnswer;
+    public String currentInput = "";   
+    public String currentQuestion;
+    public String currentAnswer;
 
-    private String wrongAnswers;
-    private String correctAnswers;
+    public String wrongAnswers;
+    public String correctAnswers;
 
-    private int answeredCorrect = 0;
+    public int answeredCorrect = 0;
 
 
     public QuizModel() {
         this.quizWordFactory = new QuizWordFactory();
         this.gameState = GameState.ACTIVE_GAME;
         this.levelList = new ArrayList<>();
+
         startLevel();
+        //for (int i =0 ; i <levelList.size();i++){
+        //    System.out.println(levelList.get(i).getQuestion());
+        //} 5 quizword-objekter i liste
+
         currentQuizWord = getCurrentWord();
         currentQuestion = currentQuizWord.getQuestion();
         currentAnswer = currentQuizWord.getAnswer();
+        System.out.println(levelList);
+
+        
         
     }
     

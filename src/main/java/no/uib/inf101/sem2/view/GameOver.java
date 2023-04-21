@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-
 import javax.swing.Timer;
 import no.uib.inf101.sem2.model.GameState;
 
@@ -15,7 +13,6 @@ public class GameOver implements ViewableQuizModel{
   private GameState gamestate = GameState.GAME_OVER;
   private Timer timer;
   private boolean continueIsPressed = false;
-  private boolean startIsPressed = false;
 
   int PANEL_WIDTH;
   int x;
@@ -45,7 +42,6 @@ public class GameOver implements ViewableQuizModel{
 
   public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
     if (countdown == 0){
-      Color fillButton = Color.CYAN;
       Color color = hoverColor;
       button = new Rectangle2D.Double(rect.getCenterX()-150, rect.getY() * 11.5, 300, 100);
       g2.setColor(color);

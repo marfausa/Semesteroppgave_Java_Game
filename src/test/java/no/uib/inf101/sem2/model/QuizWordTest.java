@@ -3,14 +3,8 @@ package no.uib.inf101.sem2.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import no.uib.inf101.sem2.controller.QuizController;
-import no.uib.inf101.sem2.view.DrawView;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 import java.util.ArrayList;
 
@@ -21,12 +15,11 @@ public class QuizWordTest{
     QuizWordFactory qwf = new QuizWordFactory();
     assertEquals(9, qwf.getWordList(1).size());
     
-    QuizModel model = new QuizModel(qwf);
-    DrawView view = new DrawView(model);
+    QuizModel model = new QuizModel();
 
     ArrayList<QuizWord> l = new ArrayList<>();
     assertEquals(0, l.size());
-    assertEquals(4, qwf.getWordList(1).size());
+    assertEquals(9, qwf.getWordList(1).size());
     assertEquals(5, qwf.GetNewQuizWords(3).size());
 
     QuizWord word = new QuizWord("kjærleik", "kjærlighet", null);
