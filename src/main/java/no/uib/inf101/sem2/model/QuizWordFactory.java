@@ -9,61 +9,61 @@ public class QuizWordFactory {
     
 //String[] quizWords;
 QuizWord[] level5 = {
-        new QuizWord("Få hugilt","bli ille til mote", Color.RED),
+        new QuizWord("Få hugilt","bli ille til mote", Color.BLUE),
         new QuizWord("Kome or vona", "miste håpet", Color.BLUE),
-        new QuizWord("Rettferdsvederlag", "Billighetserstatning", Color.RED),
+        new QuizWord("Rettferdsvederlag", "Billighetserstatning", Color.BLUE),
         new QuizWord("Kome på rakedeisen", "Komme på avveie", Color.BLUE),
-        new QuizWord("Vørdsamt", "Ærbødigst", Color.RED),
+        new QuizWord("Vørdsamt", "Ærbødigst", Color.BLUE),
         new QuizWord("Åtgjerd", "Tiltak", Color.BLUE),
-        new QuizWord("Vørdsle", "I orden", Color.RED),
-        new QuizWord("Hugleik", "Fantasi", Color.RED),
+        new QuizWord("Vørdsle", "I orden", Color.BLUE),
+        new QuizWord("Hugleik", "Fantasi", Color.BLUE),
         new QuizWord("Hovmod", "Arroganse", Color.BLUE)
 };
 
 QuizWord[] level4 = {
-    new QuizWord("Korkje","Verken", Color.RED),
-    new QuizWord("Reiarlag", "Rederi", Color.BLUE),
-    new QuizWord("Hopehav", "Fellesskap", Color.RED),
-    new QuizWord("Eigenfråsegn", "Egenerklæring", Color.BLUE),
-    new QuizWord("Røyndom", "Virkelighet", Color.RED),
-    new QuizWord("Semje", "Enighet", Color.BLUE),
-    new QuizWord("Framifrå", "Fremragende", Color.RED),
-    new QuizWord("Samrøystes", "Enstemmig", Color.RED),
-    new QuizWord("Omsutsfull", "Omsorgsfull", Color.BLUE)
+    new QuizWord("Korkje","Verken", Color.MAGENTA),
+    new QuizWord("Reiarlag", "Rederi", Color.MAGENTA),
+    new QuizWord("Hopehav", "Fellesskap", Color.MAGENTA),
+    new QuizWord("Eigenfråsegn", "Egenerklæring", Color.MAGENTA),
+    new QuizWord("Røyndom", "Virkelighet", Color.MAGENTA),
+    new QuizWord("Semje", "Enighet", Color.MAGENTA),
+    new QuizWord("Framifrå", "Fremragende", Color.MAGENTA),
+    new QuizWord("Samrøystes", "Enstemmig", Color.MAGENTA),
+    new QuizWord("Omsutsfull", "Omsorgsfull", Color.MAGENTA)
 };
 
 QuizWord[] level3 = {
-    new QuizWord("Forkava","Stresset", Color.RED),
-    new QuizWord("Teieplikt", "Taushetsplikt", Color.BLUE),
-    new QuizWord("Høve", "Anledning", Color.RED),
-    new QuizWord("Til dømes", "For eksempel", Color.BLUE),
-    new QuizWord("Løyndom", "Hemmelighet", Color.RED),
-    new QuizWord("Vørdnad", "Verdighet", Color.BLUE),
-    new QuizWord("Lønsemd", "Lønnsomhet", Color.RED),
+    new QuizWord("Forkava","Stresset", Color.ORANGE),
+    new QuizWord("Teieplikt", "Taushetsplikt", Color.ORANGE),
+    new QuizWord("Høve", "Anledning", Color.ORANGE),
+    new QuizWord("Til dømes", "For eksempel", Color.ORANGE),
+    new QuizWord("Løyndom", "Hemmelighet", Color.ORANGE),
+    new QuizWord("Vørdnad", "Verdighet", Color.ORANGE),
+    new QuizWord("Lønsemd", "Lønnsomhet", Color.ORANGE),
     
 };
 
 QuizWord[] level2 = {
-new QuizWord("Augneblink","Øyeblikk", Color.RED),
-new QuizWord("Synfaring", "Befaring", Color.BLUE),
-new QuizWord("Verksemd", "Bedrift", Color.RED),
-new QuizWord("Tilsetja", "Ansette", Color.BLUE),
-new QuizWord("Melding", "Anmeldelse", Color.RED),
-new QuizWord("Merknad", "Anmerkning", Color.BLUE),
-new QuizWord("Tilsett", "Ansatt", Color.RED),
+new QuizWord("Augneblink","Øyeblikk", Color.YELLOW),
+new QuizWord("Synfaring", "Befaring", Color.YELLOW),
+new QuizWord("Verksemd", "Bedrift", Color.YELLOW),
+new QuizWord("Tilsetja", "Ansette", Color.YELLOW),
+new QuizWord("Melding", "Anmeldelse", Color.YELLOW),
+new QuizWord("Merknad", "Anmerkning", Color.YELLOW),
+new QuizWord("Tilsett", "Ansatt", Color.YELLOW),
 
 };
 
 QuizWord[] level1 = {
-    new QuizWord("Yrkedag","Virkedag", Color.RED),
-    new QuizWord("Arbeidsløyse", "Arbeidsledighet", Color.BLUE),
-    new QuizWord("Byrja", "Begynne", Color.RED),
-    new QuizWord("Eigenfråsegn", "Egenerklæring", Color.BLUE),
-    new QuizWord("Førespurnad", "forespørsel", Color.RED),
-    new QuizWord("Fridom", "Frihet", Color.BLUE),
-    new QuizWord("Viten", "Kunnskap", Color.RED),
-    new QuizWord("Kvifor", "Hvorfor", Color.RED),
-    new QuizWord("Korleis", "Hvordan", Color.BLUE)
+    new QuizWord("Yrkedag","Virkedag", Color.WHITE),
+    new QuizWord("Arbeidsløyse", "Arbeidsledighet", Color.WHITE),
+    new QuizWord("Byrja", "Begynne", Color.WHITE),
+    new QuizWord("Eigenfråsegn", "Egenerklæring", Color.WHITE),
+    new QuizWord("Førespurnad", "forespørsel", Color.WHITE),
+    new QuizWord("Fridom", "Frihet", Color.WHITE),
+    new QuizWord("Viten", "Kunnskap", Color.WHITE),
+    new QuizWord("Kvifor", "Hvorfor", Color.WHITE),
+    new QuizWord("Korleis", "Hvordan", Color.WHITE)
     };
 
 ArrayList<QuizWord> level1Words = new ArrayList<>();

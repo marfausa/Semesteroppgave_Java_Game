@@ -29,7 +29,7 @@ public class InputBox  {
         g2.draw(inputBox);
         g2.fill(inputBox);
         
-        g2.setColor(color.WHITE);
+        g2.setColor(Color.WHITE);
         Inf101Graphics.drawCenteredString(g2, input, inputBox);
 
       }

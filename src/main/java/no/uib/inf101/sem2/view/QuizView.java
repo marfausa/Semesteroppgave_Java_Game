@@ -66,6 +66,7 @@ public class QuizView implements ViewableQuizModel {
       if (stageInterval == -2){
         expandingWord();
       }
+
     }
     if (gamestate == GameState.GAME_OVER){
       timer.stop();
@@ -98,7 +99,7 @@ public class QuizView implements ViewableQuizModel {
 
     boolean stageContinue = true;
 
-    if (this.level == 1 ){
+    if (this.level == 1){
       stageContinue = drawQuizStage(g2, rect);
       if (stageContinue){
         stageContinue = drawQuizStage(g2, rect);
@@ -113,13 +114,22 @@ public class QuizView implements ViewableQuizModel {
   private boolean drawQuizStage(Graphics2D g2, Rectangle2D rect){
     String correctInput = model.getCorrectUserAnswer();
     
+    //this.level = model.getCurrentLevel();
+    //int noMoreWordsinLevel = model.getWordsLeftInLevel();
+    
+    if (this.level == 1){
+      if (this.countdown ==-1){
+        Inf101Graphics.drawCenteredString(g2, "NIVÅ " + String.valueOf(model.getCurrentLevel()), rect, 80f); 
+      } 
+
     if (this.countdown == -2){
       stageInterval = this.countdown;
     }
 
     if (stageInterval == -2){
-         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
-         inputBox.drawInputBox();  
+        g2.setColor(model.getCurrentColor());
+        Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
+        inputBox.drawInputBox();  
     }
     if (this.start > 239f){
          g2.setColor(Color.RED);
@@ -129,8 +139,10 @@ public class QuizView implements ViewableQuizModel {
       this.model.nextStage();
       return true;
     }
+  }
     return false;
   }
+
 
 
 
@@ -170,7 +182,7 @@ public class QuizView implements ViewableQuizModel {
 
   private void expandingWord(){
     if (start < end){
-      start *= 1.0003;
+      start *= 1.0004;
     }
   }
 
@@ -185,11 +197,6 @@ public class QuizView implements ViewableQuizModel {
       startedQuiz = true;
     }
 
-    if (countdown ==-1){
-      if (this.level == 1)
-      Inf101Graphics.drawCenteredString(g2, "NIVÅ 1", rect, 80f);
-      
-    }
   }
   
 }

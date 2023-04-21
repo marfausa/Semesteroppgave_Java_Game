@@ -1,5 +1,6 @@
 package no.uib.inf101.sem2.model;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,6 +21,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     public String currentInput = "";   
     public String currentQuestion;
     public String currentAnswer;
+    public Color currentColor;
 
     public String wrongAnswers;
     public String correctAnswers;
@@ -33,13 +35,14 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.levelList = new ArrayList<>();
 
         startLevel();
-        //for (int i =0 ; i <levelList.size();i++){
-        //    System.out.println(levelList.get(i).getQuestion());
-        //} 5 quizword-objekter i liste
+        for (int i =0 ; i <levelList.size();i++){
+           System.out.println(levelList.get(i).getQuestion());
+        } 
 
         currentQuizWord = getCurrentWord();
         currentQuestion = currentQuizWord.getQuestion();
         currentAnswer = currentQuizWord.getAnswer();
+        currentColor = currentQuizWord.getWordColor();
         System.out.println(levelList);
 
         
@@ -142,6 +145,9 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     public String getCurrentAnswer(){
         return this.currentAnswer;
     }
+    public Color getCurrentColor(){
+        return this.currentColor;
+    }
 
     public int getStageProgression(){
         return stageCounter;
@@ -172,6 +178,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.currentQuizWord = getCurrentWord();
         this.currentQuestion = this.currentQuizWord.getQuestion();
         this.currentAnswer = this.currentQuizWord.getAnswer();
+        this.currentColor = this.currentQuizWord.getWordColor();
         this.currentInput = "";   
         this.wrongAnswers = null;
 
@@ -186,6 +193,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.currentQuizWord = getCurrentWord();
         this.currentQuestion = this.currentQuizWord.getQuestion();
         this.currentAnswer = this.currentQuizWord.getAnswer();
+        this.currentColor = this.currentQuizWord.getWordColor();
         this.currentInput = "";   
         this.wrongAnswers = null;
     

@@ -4,13 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import no.uib.inf101.sem2.controller.QuizController;
-import no.uib.inf101.sem2.view.DrawView;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 import java.util.ArrayList;
 
@@ -18,10 +13,7 @@ import java.util.ArrayList;
 public class QuizModelTest{
   @Test
   public void modelTest(){
-    QuizWordFactory qwf = new QuizWordFactory();
-    
     QuizModel model = new QuizModel();
-    DrawView view = new DrawView(model);
 
     ArrayList<QuizWord> list = model.getWordList();
     assertEquals(4,model.levelList.size());
@@ -52,6 +44,7 @@ public class QuizModelTest{
     model.nextStage();
     assertEquals(1,model.levelList.size());
     model.nextStage();
+    assertEquals(0,model.levelList.size());
 
     //Level 3
     model.nextStage();
@@ -65,6 +58,7 @@ public class QuizModelTest{
     model.nextStage();
     assertEquals(1,model.levelList.size());
     model.nextStage();
+    assertEquals(0,model.levelList.size());
 
     //Level 4
     model.nextStage();
@@ -77,6 +71,7 @@ public class QuizModelTest{
     model.nextStage();
     assertEquals(1,model.levelList.size());
     model.nextStage();
+    assertEquals(0,model.levelList.size());
 
     //Level 5
     model.nextStage();
@@ -89,6 +84,7 @@ public class QuizModelTest{
     model.nextStage();
     assertEquals(1,model.levelList.size());
     model.nextStage();
+    assertEquals(0,model.levelList.size());
 
   }
 
