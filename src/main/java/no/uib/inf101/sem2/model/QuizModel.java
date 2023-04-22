@@ -35,6 +35,7 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.levelList = new ArrayList<>();
 
         startLevel();
+      
         for (int i =0 ; i <levelList.size();i++){
            System.out.println(levelList.get(i).getQuestion());
         } 
@@ -43,8 +44,10 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         currentQuestion = currentQuizWord.getQuestion();
         currentAnswer = currentQuizWord.getAnswer();
         currentColor = currentQuizWord.getWordColor();
-        System.out.println(levelList);
 
+        // print fasitsvar
+        System.out.println("Level " + this.level + ": " + getCurrentQuestion() + " = " + this.currentAnswer);
+        
         
         
     }
@@ -196,7 +199,12 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.currentColor = this.currentQuizWord.getWordColor();
         this.currentInput = "";   
         this.wrongAnswers = null;
-    
+        
+
+         // Print fasitsvar
+        System.out.println("Level " + this.level + ": " + getCurrentQuestion() + " = " + this.currentAnswer);
+        
+        
 
         }
 

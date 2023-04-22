@@ -15,7 +15,7 @@ QuizWord[] level5 = {
         new QuizWord("Kome på rakedeisen", "Komme på avveie", Color.BLUE),
         new QuizWord("Vørdsamt", "Ærbødigst", Color.BLUE),
         new QuizWord("Åtgjerd", "Tiltak", Color.BLUE),
-        new QuizWord("Vørdsle", "I orden", Color.BLUE),
+        new QuizWord("Vørdsle", "Stelle", Color.BLUE),
         new QuizWord("Hugleik", "Fantasi", Color.BLUE),
         new QuizWord("Hovmod", "Arroganse", Color.BLUE)
 };
@@ -58,7 +58,6 @@ QuizWord[] level1 = {
     new QuizWord("Yrkedag","Virkedag", Color.WHITE),
     new QuizWord("Arbeidsløyse", "Arbeidsledighet", Color.WHITE),
     new QuizWord("Byrja", "Begynne", Color.WHITE),
-    new QuizWord("Eigenfråsegn", "Egenerklæring", Color.WHITE),
     new QuizWord("Førespurnad", "forespørsel", Color.WHITE),
     new QuizWord("Fridom", "Frihet", Color.WHITE),
     new QuizWord("Viten", "Kunnskap", Color.WHITE),

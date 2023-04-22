@@ -30,6 +30,7 @@ public class DrawView extends JPanel {
   TitleScreen titleScreen;
   QuizView quizScreen;
   GameOver gameOverScreen;
+  Victory victoryScreen;
 
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
@@ -49,6 +50,7 @@ public class DrawView extends JPanel {
     this.titleScreen = new TitleScreen(PANEL_WIDTH);
     this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, getModel(), 4);
     this.gameOverScreen = new GameOver(PANEL_WIDTH);
+    this.victoryScreen = new Victory(PANEL_WIDTH);
   
     }
       
@@ -90,8 +92,13 @@ public class DrawView extends JPanel {
         repaint();
       }
       
-      else if (gamestate == GameState.GAME_OVER){
+      
+      if (gamestate == GameState.GAME_OVER){
         drawGameOver(g2);
+        repaint();
+      }
+      else if (quizScreen.isQuizCleared()){
+        drawVictoryScreen(g2);
         repaint();
       }
       
@@ -150,8 +157,12 @@ public class DrawView extends JPanel {
       gameOverScreen.draw(g2, rect, color);
 
       
-      
     }
+
+  private void drawVictoryScreen(Graphics2D g2){
+    Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
+    victoryScreen.draw(g2, button, color);
+  }
   
   
   private Rectangle2D getRectangle() {

@@ -18,7 +18,6 @@ public class QuizController implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
     @Override
@@ -55,6 +54,5 @@ public class QuizController implements KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
     }
 }

@@ -29,16 +29,21 @@ public class QuizView implements ViewableQuizModel {
 
   boolean startCountdown = false;
   boolean startedQuiz = false;
+  boolean quizClear = false;
   
   
   int numQuestions = 25;
   int stageCounter = 0;
+
   int countdown;
   int stageInterval = 0;
-  int level = 1;
+  int levelUp = 0;
+
+  int level = 0;
 
   boolean wrongAnswer;
   boolean correctAnswer;
+  
 
   float start = 60f;
   float end = 240f;
@@ -62,8 +67,8 @@ public class QuizView implements ViewableQuizModel {
   public void actionPerformed(ActionEvent e) {
     countDown();
     if (startedQuiz){
-      timer.setDelay(1);
-      if (stageInterval == -2){
+      
+      if (stageInterval == -1){
         expandingWord();
       }
 
@@ -95,63 +100,69 @@ public class QuizView implements ViewableQuizModel {
     if (numQuestions == 25){
         drawCountdown(g2, rect);
     }
-    drawAmountofQuestions(g2, rect);
-
-    boolean stageContinue = true;
-
-    if (this.level == 1){
-      stageContinue = drawQuizStage(g2, rect);
-      if (stageContinue){
-        stageContinue = drawQuizStage(g2, rect);
-        this.numQuestions -= 1;
-        this.start = 60f;
-    
-      }
+    if (numQuestions == 0){
+      this.quizClear = true;
     }
+    drawAmountofQuestions(g2, rect);
+    drawQuizStage(g2, rect);
     
   }
 
-  private boolean drawQuizStage(Graphics2D g2, Rectangle2D rect){
-    String correctInput = model.getCorrectUserAnswer();
-    
-    //this.level = model.getCurrentLevel();
-    //int noMoreWordsinLevel = model.getWordsLeftInLevel();
-    
-    if (this.level == 1){
-      if (this.countdown ==-1){
-        Inf101Graphics.drawCenteredString(g2, "NIVÅ " + String.valueOf(model.getCurrentLevel()), rect, 80f); 
-      } 
+  public boolean isQuizCleared(){
+    return this.quizClear;
+  }
 
-    if (this.countdown == -2){
+
+  private void drawQuizStage(Graphics2D g2, Rectangle2D rect){
+    String correctInput = model.getCorrectUserAnswer();
+
+
+    if (this.countdown == -1){
       stageInterval = this.countdown;
     }
 
-    if (stageInterval == -2){
+    if (stageInterval == -1){
         g2.setColor(model.getCurrentColor());
         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
         inputBox.drawInputBox();  
     }
-    if (this.start > 239f){
+    if (this.start > this.end){
          g2.setColor(Color.RED);
-         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
-         gamestate = GameState.GAME_OVER;   
+         Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.start);
+         gamestate = GameState.GAME_OVER; 
+
     } else if (correctInput != null && correctInput.equalsIgnoreCase(model.getCurrentAnswer())){
       this.model.nextStage();
-      return true;
+      this.numQuestions -= 1;
+      this.start = 60f;
     }
+
+   
   }
-    return false;
-  }
-
-
-
 
    
   public void drawAmountofQuestions(Graphics2D g2, Rectangle2D rect){
     if (startedQuiz){
-      g2.setColor(Color.WHITE);
+      g2.setColor(model.getCurrentColor());
       g2.setFont(new Font("Arial", Font.PLAIN, 24));
+      g2.drawString("NIVÅ: " + model.getCurrentLevel(), 1000, 100);
+      
+      g2.setColor(Color.WHITE);
       g2.drawString("Resterande oppgåver: " + numQuestions, 80, 100);
+
+      if (this.start == 192){
+        g2.setColor(Color.RED);
+        g2.drawString("3", 500, 100);
+      }
+      if (this.start == 208){
+        g2.setColor(Color.RED);
+        g2.drawString("2", 500, 100);
+      }
+      if (this.start == 239){
+        g2.setColor(Color.RED);
+        g2.drawString("1", 500, 100);
+      }
+
 
       String wrongInput = model.getWrongUserAnswer();
       if (wrongInput != null && !wrongInput.equalsIgnoreCase(model.getCurrentAnswer())){
@@ -175,14 +186,14 @@ public class QuizView implements ViewableQuizModel {
   
   
   private void countDown(){
-    if (startCountdown){
-      countdown -= 1;
+    if (this.startCountdown){
+      this.countdown -= 1;
     } 
   }
 
   private void expandingWord(){
     if (start < end){
-      start *= 1.0004;
+      start *= 1.001;
     }
   }
 
@@ -195,9 +206,11 @@ public class QuizView implements ViewableQuizModel {
     if (countdown == 0){
       Inf101Graphics.drawCenteredString(g2, "KVISS START!", rect, 60f);
       startedQuiz = true;
+      timer.setDelay(10);
     }
 
   }
+
   
 }
 
