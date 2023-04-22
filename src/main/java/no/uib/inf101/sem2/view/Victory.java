@@ -2,6 +2,7 @@ package no.uib.inf101.sem2.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
 import no.uib.inf101.sem2.model.GameState;
@@ -36,7 +37,7 @@ public class Victory implements ViewableQuizModel{
     }
 
 
-  public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
+  public void draw(Graphics2D g2, Rectangle2D rect, Rectangle2D button, Color hoverColor) {
       g2.setColor(Color.BLACK);
       g2.draw(rect);
       g2.fill(rect);

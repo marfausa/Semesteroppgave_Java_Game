@@ -43,6 +43,7 @@ public class GameOver implements ViewableQuizModel{
   public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
     if (countdown == 0){
       Color color = hoverColor;
+      
       button = new Rectangle2D.Double(rect.getCenterX()-150, rect.getY() * 11.5, 300, 100);
       g2.setColor(color);
       g2.draw(button);

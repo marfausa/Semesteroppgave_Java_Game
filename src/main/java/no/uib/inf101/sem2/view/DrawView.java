@@ -73,36 +73,49 @@ public class DrawView extends JPanel {
       g2.draw(rect);
       g2.clip(rect);
 
-      if (gamestate == GameState.TITLE_SCREEN){
-        drawTitleScreen(g2);
-        this.gamestate = titleScreen.getGameState();
-        repaint();
+      if (!quizScreen.isQuizCleared()){
+        if (gamestate == GameState.TITLE_SCREEN){
+          drawTitleScreen(g2);
+          this.gamestate = titleScreen.getGameState();
+          repaint();
+        }
+    
+        if (gameOverScreen.continueIsPressed()){
+          this.gamestate = GameState.ACTIVE_GAME;
+          gameOverScreen.pressContinue(false);
+          newGame(g2);
+          repaint();
+          
+        }
+        else if (gamestate == GameState.ACTIVE_GAME){
+          drawQuiz(g2);
+          this.gamestate = quizScreen.getGameState();
+          repaint();
+        }
+        
+        
+        if (gamestate == GameState.GAME_OVER){
+          drawGameOver(g2);
+          repaint();
+        }
+      
       }
-  
-      if (gameOverScreen.continueIsPressed()){
+    else if (quizScreen.isQuizCleared()){
+      gamestate = GameState.VICTORY;
+      drawVictoryScreen(g2);
+      if (victoryScreen.continueIsPressed()){
         this.gamestate = GameState.ACTIVE_GAME;
-        gameOverScreen.pressContinue(false);
+        victoryScreen.pressContinue(false);
         newGame(g2);
         repaint();
-        
-      }
-      else if (gamestate == GameState.ACTIVE_GAME){
-        drawQuiz(g2);
-        this.gamestate = quizScreen.getGameState();
-        repaint();
-      }
       
+      repaint();
+
+    }
+  }
+
       
-      if (gamestate == GameState.GAME_OVER){
-        drawGameOver(g2);
-        repaint();
-      }
-      else if (quizScreen.isQuizCleared()){
-        drawVictoryScreen(g2);
-        repaint();
-      }
-      
-      
+  
     }
   
   private void drawTitleScreen(Graphics2D g2){
@@ -160,8 +173,9 @@ public class DrawView extends JPanel {
     }
 
   private void drawVictoryScreen(Graphics2D g2){
+    button = victoryScreen.getButton();
     Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
-    victoryScreen.draw(g2, button, color);
+    victoryScreen.draw(g2, this.getRectangle(), button, color);
   }
   
   
@@ -222,7 +236,15 @@ public class DrawView extends JPanel {
 
               updateCursor();
               repaint();
-          }
+          } else if (gamestate == GameState.VICTORY){
+            if (mouseIsInTheRectangle){
+              victoryScreen.pressContinue(true);
+            }
+            mouseIsPressed = false;
+
+            updateCursor();
+            repaint();
+        }
         }
     });
   
