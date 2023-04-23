@@ -4,16 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import no.uib.inf101.sem2.model.GameState;
-import no.uib.inf101.sem2.view.DrawView;
 
 public class QuizController implements KeyListener{
     private ControllableQuizModel controller;
-    private DrawView view;
     String currentInput;
 
-    public QuizController (ControllableQuizModel cqm, DrawView qv){
+    public QuizController (ControllableQuizModel cqm){
         controller = cqm;
-        view = qv;
     }
 
     @Override

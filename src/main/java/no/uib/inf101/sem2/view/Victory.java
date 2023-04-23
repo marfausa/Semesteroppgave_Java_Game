@@ -2,7 +2,6 @@ package no.uib.inf101.sem2.view;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
 import no.uib.inf101.sem2.model.GameState;

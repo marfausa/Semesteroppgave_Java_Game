@@ -17,11 +17,11 @@ public class WordFactoryTest{
     ArrayList<QuizWord> level4 = qwf.getWordList(4);
     ArrayList<QuizWord> level5 = qwf.getWordList(5);
 
-    assertEquals(8, level1.size());
-    assertEquals(7, level2.size());
-    assertEquals(7, level3.size());
-    assertEquals(9, level4.size());
-    assertEquals(9, level5.size());
+    assertEquals(50, level1.size());
+    assertEquals(46, level2.size());
+    assertEquals(45, level3.size());
+    assertEquals(31, level4.size());
+    assertEquals(16, level5.size());
 
   }
 

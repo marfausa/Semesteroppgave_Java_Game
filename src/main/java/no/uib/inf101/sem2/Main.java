@@ -2,7 +2,6 @@ package no.uib.inf101.sem2;
 
 import no.uib.inf101.sem2.controller.QuizController;
 import no.uib.inf101.sem2.model.QuizModel;
-import no.uib.inf101.sem2.model.QuizWordFactory;
 import no.uib.inf101.sem2.view.DrawView;
 
 
@@ -14,7 +13,7 @@ public class Main {
     QuizModel model = new QuizModel();
     DrawView view = new DrawView(model);
 
-    QuizController quizController = new QuizController(model, view);
+    QuizController quizController = new QuizController(model);
 
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
