@@ -17,20 +17,20 @@ public class GameOver implements ViewableQuizModel{
   int PANEL_WIDTH;
   int x;
   int y;
-  int countdown = 3;
+  int countdown = 1;
   
 
   public GameOver(int pw) {
     PANEL_WIDTH = pw;
   
-    timer = new Timer(4, this);
+    timer = new Timer(1000, this);
     timer.start();
   }
 
   @Override
     public void actionPerformed(ActionEvent e) {
-      if (countdown > 0){
-        countdown -= 1;
+      if (this.countdown > 0){
+        this.countdown -= 1;
       } 
   
   }

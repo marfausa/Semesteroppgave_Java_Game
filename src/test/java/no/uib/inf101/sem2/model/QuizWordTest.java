@@ -13,13 +13,13 @@ public class QuizWordTest{
   @Test
   public void sanityTest(){
     QuizWordFactory qwf = new QuizWordFactory();
-    assertEquals(9, qwf.getWordList(1).size());
+    assertEquals(8, qwf.getWordList(1).size());
     
     QuizModel model = new QuizModel();
 
     ArrayList<QuizWord> l = new ArrayList<>();
     assertEquals(0, l.size());
-    assertEquals(9, qwf.getWordList(1).size());
+    assertEquals(8, qwf.getWordList(1).size());
     assertEquals(5, qwf.GetNewQuizWords(3).size());
 
     QuizWord word = new QuizWord("kjærleik", "kjærlighet", null);

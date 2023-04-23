@@ -89,6 +89,18 @@ public class QuizView implements ViewableQuizModel {
     timer.start();
   }
 
+  private void countDown(){
+    if (this.startCountdown){
+      this.countdown -= 1;
+    } 
+  }
+
+  private void expandingWord(){
+    if (start < end){
+      start *= 1.001;
+    }
+  }
+
   public void draw(Graphics2D g2, Rectangle2D rect) {
     inputBox = new InputBox(g2, rect, this.model.getInputAnswer());
  
@@ -148,20 +160,10 @@ public class QuizView implements ViewableQuizModel {
       g2.drawString("NIVÅ: " + model.getCurrentLevel(), 1000, 100);
       
       g2.setColor(Color.WHITE);
-      g2.drawString("Resterande oppgåver: " + numQuestions, 80, 100);
+      g2.drawString("Resterande gloser: " + numQuestions, 80, 100);
 
-      if (this.start == 192){
-        g2.setColor(Color.RED);
-        g2.drawString("3", 500, 100);
-      }
-      if (this.start == 208){
-        g2.setColor(Color.RED);
-        g2.drawString("2", 500, 100);
-      }
-      if (this.start == 239){
-        g2.setColor(Color.RED);
-        g2.drawString("1", 500, 100);
-      }
+      drawTimeLeft(g2, rect);
+      
 
 
       String wrongInput = model.getWrongUserAnswer();
@@ -181,19 +183,18 @@ public class QuizView implements ViewableQuizModel {
         g2.drawString("X " + wrongInput, 80, 150);
         g2.setColor(Color.WHITE);
       
-    
-  }
-  
-  
-  private void countDown(){
-    if (this.startCountdown){
-      this.countdown -= 1;
-    } 
   }
 
-  private void expandingWord(){
-    if (start < end){
-      start *= 1.001;
+  private void drawTimeLeft(Graphics2D g2, Rectangle2D rect){
+    g2.setColor(Color.RED.darker());
+    if (this.start > 190 && this.start < 206){
+      Inf101Graphics.drawCenteredString(g2, "3", rect,  160, 120);
+    }
+    if (this.start > 206 && this.start < 222){
+      Inf101Graphics.drawCenteredString(g2, "2", rect,  160, 120);
+    }
+    if (this.start > 222 && this.start < 239){
+      Inf101Graphics.drawCenteredString(g2, "1", rect,  160, 120);
     }
   }
 

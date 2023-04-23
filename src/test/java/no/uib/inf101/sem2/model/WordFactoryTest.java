@@ -17,7 +17,7 @@ public class WordFactoryTest{
     ArrayList<QuizWord> level4 = qwf.getWordList(4);
     ArrayList<QuizWord> level5 = qwf.getWordList(5);
 
-    assertEquals(9, level1.size());
+    assertEquals(8, level1.size());
     assertEquals(7, level2.size());
     assertEquals(7, level3.size());
     assertEquals(9, level4.size());

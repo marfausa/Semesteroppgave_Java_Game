@@ -37,13 +37,13 @@ public class Victory implements ViewableQuizModel{
     }
 
 
-  public void draw(Graphics2D g2, Rectangle2D rect, Rectangle2D button, Color hoverColor) {
+  public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
       g2.setColor(Color.BLACK);
       g2.draw(rect);
       g2.fill(rect);
 
       g2.setColor(Color.CYAN);
-      Inf101Graphics.drawCenteredString(g2, "GRATULERER DU VANT", rect, 60f);
+      Inf101Graphics.drawCenteredString(g2, "GRATULERER! DU VANN!", rect, 60f);
 
       
       Color color = hoverColor;

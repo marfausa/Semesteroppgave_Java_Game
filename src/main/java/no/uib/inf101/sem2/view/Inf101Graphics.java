@@ -100,6 +100,14 @@ public class Inf101Graphics {
         
   }
 
+  public static void drawCenteredString(Graphics g, String s, Shape shape, double y, float fontsize) {
+    Font font = g.getFont().deriveFont(fontsize);
+    g.setFont(font);
+    Inf101Graphics.drawCenteredString(g, s, shape.getBounds2D().getCenterX(),
+        y);
+        
+  }
+
   public static void drawTitleString(Graphics g, String s, Shape shape) {
    
     Font font = g.getFont().deriveFont(60f);

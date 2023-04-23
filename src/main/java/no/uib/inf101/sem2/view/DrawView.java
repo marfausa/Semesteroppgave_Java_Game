@@ -67,7 +67,7 @@ public class DrawView extends JPanel {
   public QuizModel getModel(){
     return newModel;
   }
-  private void drawFrame(Graphics2D g2){
+  public void drawFrame(Graphics2D g2){
       Rectangle2D rect = this.getRectangle();
       g2.setColor(Color.BLACK);
       g2.draw(rect);
@@ -87,52 +87,49 @@ public class DrawView extends JPanel {
           repaint();
           
         }
+        if (gamestate == GameState.GAME_OVER){
+          drawGameOver(g2);
+          repaint();
+        }
         else if (gamestate == GameState.ACTIVE_GAME){
           drawQuiz(g2);
           this.gamestate = quizScreen.getGameState();
           repaint();
         }
-        
-        
-        if (gamestate == GameState.GAME_OVER){
-          drawGameOver(g2);
-          repaint();
-        }
-      
       }
+
     else if (quizScreen.isQuizCleared()){
-      gamestate = GameState.VICTORY;
+      this.gamestate = GameState.VICTORY;
       drawVictoryScreen(g2);
       if (victoryScreen.continueIsPressed()){
         this.gamestate = GameState.ACTIVE_GAME;
         victoryScreen.pressContinue(false);
         newGame(g2);
         repaint();
-      
+      }
       repaint();
-
-    }
+    
   }
 
       
   
     }
   
-  private void drawTitleScreen(Graphics2D g2){
+  public void drawTitleScreen(Graphics2D g2){
       button = titleScreen.getButton();
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
       button = titleScreen.getButton();
       this.titleScreen.draw(g2, this.getRectangle(), color);  
   }
 
-  private void drawQuiz(Graphics2D g2){
+  public void drawQuiz(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     
     this.quizScreen.startTimer();
     this.quizScreen.draw(g2, rect);
   }
 
-  private void newGame(Graphics2D g2){
+  public void newGame(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     
     this.model.reset();
@@ -141,7 +138,7 @@ public class DrawView extends JPanel {
     this.quizScreen.draw(g2, rect);
   }
 
-  private void drawGameOver(Graphics2D g2){
+  public void drawGameOver(Graphics2D g2){
       Rectangle2D rect = this.getRectangle();
       button = gameOverScreen.getButton();
 
@@ -172,10 +169,12 @@ public class DrawView extends JPanel {
       
     }
 
-  private void drawVictoryScreen(Graphics2D g2){
+  public void drawVictoryScreen(Graphics2D g2){
+    Rectangle2D rect = this.getRectangle();
     button = victoryScreen.getButton();
+
     Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
-    victoryScreen.draw(g2, this.getRectangle(), button, color);
+    victoryScreen.draw(g2, rect, color);
   }
   
   
