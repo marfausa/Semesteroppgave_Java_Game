@@ -3,6 +3,8 @@ package no.uib.inf101.sem2.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
 
 import java.awt.event.ActionEvent;
 
@@ -26,6 +28,7 @@ public class QuizView implements ViewableQuizModel {
   String currentQuestion;
   String currentAnswer;
   Timer timer;
+  BufferedImage background;
 
   boolean startCountdown = false;
   boolean startedQuiz = false;
@@ -52,6 +55,7 @@ public class QuizView implements ViewableQuizModel {
     PANEL_WIDTH = pw;
     PANEL_HEIGHT = ph;
 
+    this.background = Inf101Graphics.loadImageFromResources("/bakgrunn2.png");
     this.model = model;
     gamestate = this.model.getGameState();
     this.currentQuestion = this.model.getCurrentQuestion();
@@ -102,11 +106,11 @@ public class QuizView implements ViewableQuizModel {
   }
 
   public void draw(Graphics2D g2, Rectangle2D rect) {
+    double scale = (rect.getHeight() / this.background.getHeight());
+    Inf101Graphics.drawImage(g2, this.background, rect.getX(), rect.getY(), scale);
     inputBox = new InputBox(g2, rect, this.model.getInputAnswer());
  
-    g2.setColor(Color.BLACK);
-    g2.draw(rect);
-    g2.fill(rect);
+    
     g2.setColor(Color.WHITE);
 
     if (numQuestions == 25){

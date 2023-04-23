@@ -80,6 +80,7 @@ public class DrawView extends JPanel {
         }
     
         if (gameOverScreen.continueIsPressed()){
+          button = new Rectangle2D.Double();
           this.gamestate = GameState.ACTIVE_GAME;
           gameOverScreen.pressContinue(false);
           newGame(g2);  
@@ -139,29 +140,9 @@ public class DrawView extends JPanel {
       Rectangle2D rect = this.getRectangle();
       button = gameOverScreen.getButton();
 
-      g2.setColor(Color.BLACK);
-      g2.draw(rect);
-      g2.fill(rect);
-
-      Color dimGray = new Color(128, 128, 128, 64);
-      g2.setColor(dimGray);
-      Inf101Graphics.drawCenteredString(g2, model.getCurrentQuestion(), rect, this.end);
-
-      g2.setColor(Color.RED);
-      Inf101Graphics.drawCenteredString(g2, "GAME OVER", rect, 180f);
-
-      g2.setColor(Color.WHITE);
-      g2.setFont(new Font("Helvetica", Font.PLAIN, 50));
-      g2.drawString("Korrekt omsetjing: ", 100, 140);
-
-      g2.setColor(Color.PINK);
-      g2.setFont(new Font("Helvetica", Font.ITALIC, 40));
-      g2.drawString(model.getCurrentAnswer() , 150, 220);
-      
-      
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
 
-      gameOverScreen.draw(g2, rect, color);
+      gameOverScreen.draw(g2, rect, color, this.model, this.end);
 
       
     }
@@ -170,7 +151,7 @@ public class DrawView extends JPanel {
     Rectangle2D rect = this.getRectangle();
     button = victoryScreen.getButton();
 
-    Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.CYAN) : Color.WHITE;
+    Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.ORANGE) : Color.WHITE;
     victoryScreen.draw(g2, rect, color);
   }
   

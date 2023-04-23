@@ -4,7 +4,6 @@ import no.uib.inf101.sem2.controller.QuizController;
 import no.uib.inf101.sem2.model.QuizModel;
 import no.uib.inf101.sem2.view.DrawView;
 
-
 import javax.swing.JFrame;
 
 public class Main {
@@ -16,6 +15,7 @@ public class Main {
     QuizController quizController = new QuizController(model);
 
     JFrame frame = new JFrame();
+    frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("INF101");
     frame.setContentPane(view);

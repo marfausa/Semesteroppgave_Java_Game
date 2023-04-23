@@ -1,6 +1,7 @@
 package no.uib.inf101.sem2.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
@@ -50,6 +51,7 @@ public class TitleScreen implements ViewableQuizModel{
     Color color = hoverColor;
     double scale = (rect.getHeight() / ivar.getHeight());
     Inf101Graphics.drawImage(g2, ivar, rect.getX(), rect.getY(), scale);
+    g2.setFont(new Font("Phosphate", Font.PLAIN, 80));
 
     if (continueIsPressed()) {
         drawContinued(g2, rect, color);
