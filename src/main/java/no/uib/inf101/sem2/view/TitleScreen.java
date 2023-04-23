@@ -28,7 +28,7 @@ public class TitleScreen implements ViewableQuizModel{
 
   public TitleScreen(int pw) {
     PANEL_WIDTH = pw;
-    ivar = Inf101Graphics.loadImageFromResources("/aasen.png");
+    ivar = Inf101Graphics.loadImageFromResources("/bakgrunn.png");
     sunglasses = Inf101Graphics.loadImageFromResources("/sunglasses.png");
 
     timer = new Timer(4, this);
@@ -49,16 +49,17 @@ public class TitleScreen implements ViewableQuizModel{
   public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
     Color color = hoverColor;
     double scale = (rect.getHeight() / ivar.getHeight());
-    Inf101Graphics.drawTitleString(g2, "NynorskKviss!", rect);
     Inf101Graphics.drawImage(g2, ivar, rect.getX(), rect.getY(), scale);
 
     if (continueIsPressed()) {
         drawContinued(g2, rect, color);
 
     } else {
-      button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 20, rect.getY() + rect.getHeight() / 2, 500, 100);
-      g2.setColor(color);
+      button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 100, rect.getY() + rect.getHeight() / 2, 350, 100);
       g2.draw(button);
+      g2.setColor(new Color(174, 214, 241));
+      g2.fill(button);
+      g2.setColor(color);
       Inf101Graphics.drawCenteredString(g2, "Klikk for å fortsetja", button);
     }
 
@@ -70,12 +71,15 @@ public class TitleScreen implements ViewableQuizModel{
 
   private void drawContinued(Graphics2D g2, Rectangle2D rect, Color color){
     button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 200, rect.getY() + rect.getHeight() / 2, 150, 100);
-    g2.setColor(color);
     g2.draw(button);
+    g2.setColor(new Color(174, 214, 241));
+    g2.fill(button);
+    g2.setColor(color);
+    
     Inf101Graphics.drawCenteredString(g2, "START", button);
     
     // Initiate position of sunglasses image
-    int y = (int) (rect.getBounds().getHeight() / 2.4 - sunglasses.getHeight() / 2);
+    int y = (int) (rect.getBounds().getHeight() / 2 - sunglasses.getHeight() / 2);
     g2.drawImage(sunglasses, this.x, y, null);
   }
 
