@@ -77,25 +77,24 @@ public class DrawView extends JPanel {
         if (gamestate == GameState.TITLE_SCREEN){
           drawTitleScreen(g2);
           this.gamestate = titleScreen.getGameState();
-          repaint();
         }
     
         if (gameOverScreen.continueIsPressed()){
           this.gamestate = GameState.ACTIVE_GAME;
           gameOverScreen.pressContinue(false);
-          newGame(g2);
-          repaint();
-          
+          newGame(g2);  
         }
+
         if (gamestate == GameState.GAME_OVER){
           drawGameOver(g2);
-          repaint();
         }
+
         else if (gamestate == GameState.ACTIVE_GAME){
           drawQuiz(g2);
           this.gamestate = quizScreen.getGameState();
-          repaint();
         }
+        
+        repaint();
       }
 
     else if (quizScreen.isQuizCleared()){
@@ -104,22 +103,20 @@ public class DrawView extends JPanel {
       if (victoryScreen.continueIsPressed()){
         this.gamestate = GameState.ACTIVE_GAME;
         victoryScreen.pressContinue(false);
-        newGame(g2);
-        repaint();
+        newGame(g2); 
       }
-      repaint();
-    
-  }
-
       
+      repaint();
+    }  
+}
   
-    }
-  
+
   public void drawTitleScreen(Graphics2D g2){
       button = titleScreen.getButton();
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
       button = titleScreen.getButton();
-      this.titleScreen.draw(g2, this.getRectangle(), color);  
+      this.titleScreen.draw(g2, this.getRectangle(), color); 
+       
   }
 
   public void drawQuiz(Graphics2D g2){
