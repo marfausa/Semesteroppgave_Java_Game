@@ -3,7 +3,6 @@ package no.uib.inf101.sem2.view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -20,8 +19,8 @@ import no.uib.inf101.sem2.model.QuizModel;
 
 public class DrawView extends JPanel {
 
-  QuizModel newModel;
-  private QuizModel model;
+  
+  QuizModel model;
   final int PANEL_WIDTH = 1200;
   final int PANEL_HEIGHT = 800;
   
@@ -34,13 +33,10 @@ public class DrawView extends JPanel {
 
   private boolean mouseIsInTheRectangle = false;
   private boolean mouseIsPressed = false;
-  
-
   float start = 60f;
   float end = 240f;
   
   public DrawView(QuizModel model) {
-    this.newModel = model;
     this.model = model;
     this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
     this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -48,12 +44,12 @@ public class DrawView extends JPanel {
     this.setupMousePressedUpdater();
     
     this.titleScreen = new TitleScreen(PANEL_WIDTH);
-    this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, getModel(), 4);
-    this.gameOverScreen = new GameOver(PANEL_WIDTH);
-    this.victoryScreen = new Victory(PANEL_WIDTH);
-  
-    }
+    this.quizScreen = new QuizView(PANEL_WIDTH, PANEL_HEIGHT, this.model, 4);
+    this.gameOverScreen = new GameOver();
+    this.victoryScreen = new Victory();
+  }
       
+
 
   @Override
   protected void paintComponent(Graphics g) {
@@ -61,12 +57,15 @@ public class DrawView extends JPanel {
     Graphics2D g2 = (Graphics2D) g;
     drawFrame(g2);
 
-  
   }
 
-  public QuizModel getModel(){
-    return newModel;
-  }
+    /**
+     * Metode som kontrollerer hvilke skjermer som skal tegnes.
+     * Så lenge spilleren ikke har vunnet spillet, sjekker den opp mot enum for å se hvilken status spillet er i.
+     * Dersom spilleren har vunnet får de muligheten til å starte spillet på nytt om ønskelig.
+     * repaint()
+     * @param g2
+     */
   public void drawFrame(Graphics2D g2){
       Rectangle2D rect = this.getRectangle();
       g2.setColor(Color.BLACK);
@@ -109,9 +108,13 @@ public class DrawView extends JPanel {
       
       repaint();
     }  
-}
+  }
   
 
+    /**
+     * Kaller på titleScreen-klassen for å tegne hovedmenyen når programmet starter.
+     * @param g2
+     */
   public void drawTitleScreen(Graphics2D g2){
       button = titleScreen.getButton();
       Color color = mouseIsInTheRectangle ? (mouseIsPressed ? Color.RED : Color.BLUE) : Color.BLACK;
@@ -120,6 +123,10 @@ public class DrawView extends JPanel {
        
   }
 
+    /**
+     * Kaller på quizScreen-klassen og tegner den.
+     * @param g2
+     */
   public void drawQuiz(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     
@@ -127,6 +134,11 @@ public class DrawView extends JPanel {
     this.quizScreen.draw(g2, rect);
   }
 
+    /**
+     * reset()-metoden til quizmodel-klassen kalles slik at nye ord initeres før spillet starter på nytt.
+     * Lager ny quizView og tegner denne.
+     * @param g2
+     */
   public void newGame(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     
@@ -136,6 +148,10 @@ public class DrawView extends JPanel {
     this.quizScreen.draw(g2, rect);
   }
 
+    /**
+     * Kaller på gameover-klassen for å tegne game over-skjermen
+     * @param g2
+     */
   public void drawGameOver(Graphics2D g2){
       Rectangle2D rect = this.getRectangle();
       button = gameOverScreen.getButton();
@@ -145,8 +161,12 @@ public class DrawView extends JPanel {
       gameOverScreen.draw(g2, rect, color, this.model, this.end);
 
       
-    }
+  }
 
+   /**
+     * Kaller på victoryScreen-klassen for å tegne skjermen så vises når man vinner spillet.
+     * @param g2
+     */
   public void drawVictoryScreen(Graphics2D g2){
     Rectangle2D rect = this.getRectangle();
     button = victoryScreen.getButton();
@@ -159,6 +179,10 @@ public class DrawView extends JPanel {
   private Rectangle2D getRectangle() {
     return new Rectangle2D.Double(50, 50, getWidth() - 100, getHeight() - 100);
   }
+
+
+    // Under er metoder for å oppdatere museklikk og museposisjon, og hvordan disse fungerer sammen med button-rektangel.
+
 
   private void setupMousePositionUpdater() {
     // Keep the mousePosition variable up to date
@@ -179,7 +203,7 @@ public class DrawView extends JPanel {
       } else {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
       }
-    }
+  }
   
 
   private void setupMousePressedUpdater() {
@@ -224,14 +248,6 @@ public class DrawView extends JPanel {
         }
         }
     });
-  
-
   }
-
-
-
-
-  
-
-  }
+}
 

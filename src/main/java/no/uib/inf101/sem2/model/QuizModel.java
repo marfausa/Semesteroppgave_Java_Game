@@ -1,14 +1,11 @@
 package no.uib.inf101.sem2.model;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Random;
-
 import no.uib.inf101.sem2.controller.ControllableQuizModel;
-import no.uib.inf101.sem2.view.ViewableQuizModel;
 
-public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
+public class QuizModel implements ControllableQuizModel {
     public GameState gameState;
     public ArrayList<QuizWord> levelList;
     public int level = 0;
@@ -45,16 +42,9 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         currentAnswer = currentQuizWord.getAnswer();
         currentColor = currentQuizWord.getWordColor();
 
-        // print fasitsvar
+        // printer fasitsvar til terminal
         System.out.println("Level " + this.level + ": " + getCurrentQuestion() + " = " + this.currentAnswer);
-        
-        
-        
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+         
     }
 
     @Override
@@ -107,9 +97,14 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
             return 0;
         }
     }
-   
 
-
+    /**
+     * Sjekker om listen inneholder QuizWord-objekt og henter ut et tilfeldig ord med Random. 
+     * Fjerner deretter ordet fra listen.
+     * Dersom det ikke er flere ord i listen kalles startLevel()-metoden for å hente ny liste.
+     * @return currentQuizWord
+     * 
+     */
     public QuizWord getCurrentWord(){
         if (levelList.size() >0){
             Random randomWord = new Random();
@@ -124,11 +119,12 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         
          }
     
-
+    //mest brukt for å teste om listene fungerer som de skal
     public ArrayList<QuizWord> getWordList(){
-        //for testing purposes mostly
         return this.levelList;
     }
+
+    /// getters for å returnere ulike variabler ////////
 
     public String getInputAnswer(){
         return currentInput;
@@ -140,7 +136,6 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
     public String getCorrectUserAnswer(){
         return correctAnswers;
     }
-
     public String getCurrentQuestion(){
         return this.currentQuestion;
     }
@@ -164,8 +159,12 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         return this.levelList.size();
     }
 
+    //////////////////////////////////////////////////////
    
-
+    /**
+     * Denne metoden fjerner alle ord og lister dersom brukeren velger å starte spillet på nytt. Initaliserer alle variabler på nytt.
+     * 
+     */
     public void reset() {
         this.quizWordFactory = new QuizWordFactory();
 
@@ -177,36 +176,41 @@ public class QuizModel implements ViewableQuizModel, ControllableQuizModel {
         this.gameState = GameState.ACTIVE_GAME;
         this.levelList = new ArrayList<>();
         startLevel();
-        
-        this.currentQuizWord = getCurrentWord();
-        this.currentQuestion = this.currentQuizWord.getQuestion();
-        this.currentAnswer = this.currentQuizWord.getAnswer();
-        this.currentColor = this.currentQuizWord.getWordColor();
-        this.currentInput = "";   
-        this.wrongAnswers = null;
-
+        updateVariables();
         
     }
+
+    /**
+     * Denne metoden kaller på hjelpemetode for å oppdatere variablene slik at spillet går videre.
+     * 
+     */
     public void nextStage(){
         this.stageCounter += 1;
         this.answeredCorrect += 1;
 
         startLevel();
+        updateVariables();
+        
 
+         // Print fasitsvar
+        System.out.println("Level " + this.level + ": " + getCurrentQuestion() + " = " + this.currentAnswer);
+        
+        }
+
+    
+     /**
+     * Kaller på ulike metoder for å oppdatere instansvariablene som omhandler info fra QuizWord-objekt.
+     */    
+    private void updateVariables(){
         this.currentQuizWord = getCurrentWord();
         this.currentQuestion = this.currentQuizWord.getQuestion();
         this.currentAnswer = this.currentQuizWord.getAnswer();
         this.currentColor = this.currentQuizWord.getWordColor();
         this.currentInput = "";   
         this.wrongAnswers = null;
-        
 
-         // Print fasitsvar
-        System.out.println("Level " + this.level + ": " + getCurrentQuestion() + " = " + this.currentAnswer);
-        
-        
-
-        }
+    
+    }
 
 
     

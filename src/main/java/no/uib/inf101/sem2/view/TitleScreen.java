@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
@@ -11,7 +12,7 @@ import javax.swing.Timer;
 import no.uib.inf101.sem2.model.GameState;
 
 
-public class TitleScreen implements ViewableQuizModel{
+public class TitleScreen implements ViewableQuizModel, ActionListener{
   private BufferedImage ivar;
   private BufferedImage sunglasses;
   private Rectangle2D button;
@@ -47,6 +48,21 @@ public class TitleScreen implements ViewableQuizModel{
       return this.gamestate;
     }
 
+  @Override
+  public Rectangle2D getButton(){
+    return this.button;
+  }
+
+   /**
+    * 
+     *Tegner hovedmenyen med bakgrunn ved hjelp av metodene i INF101Graphics
+     * Sjekker om continueIsPressed() slik at button går fra "Klikk for å fortsetja" til "Start".
+     * Dersom "START"-knappen registrerer museklikk starter spillet og gamestate = ACTIVE_GAME
+     * @param g2
+     * @param rect
+     * @param hovercolor
+
+     */
   public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor) {
     Color color = hoverColor;
     double scale = (rect.getHeight() / ivar.getHeight());
@@ -71,6 +87,10 @@ public class TitleScreen implements ViewableQuizModel{
     }
   }
 
+   /**
+     * Hjelpemetode for å tegne det som skjer etter "klikk på fortsett"-knappen er registrert.
+     * Solbriller blir tegnet og ny "START"-knapp lages.
+     */
   private void drawContinued(Graphics2D g2, Rectangle2D rect, Color color){
     button = new Rectangle2D.Double(rect.getX() + rect.getWidth() / 2 + 200, rect.getY() + rect.getHeight() / 2, 150, 100);
     g2.draw(button);
@@ -80,14 +100,11 @@ public class TitleScreen implements ViewableQuizModel{
     
     Inf101Graphics.drawCenteredString(g2, "START", button);
     
-    // Initiate position of sunglasses image
     int y = (int) (rect.getBounds().getHeight() / 2 - sunglasses.getHeight() / 2);
     g2.drawImage(sunglasses, this.x, y, null);
   }
 
-  public Rectangle2D getButton(){
-    return this.button;
-  }
+ 
   
   public boolean continueIsPressed(){
     return this.continueIsPressed;
@@ -104,19 +121,21 @@ public class TitleScreen implements ViewableQuizModel{
   }
 
 
-public void moveSunglasses(){
-    x = x+xVelocity;
-      int speedUp = xVelocity * -2;
+    /**
+     * Hjelpemetode for å bevege solbriller langs x-aksen helt til den når kanten,
+     * deretter dobles hastigheten og stopper opp dersom plasseringen er på øyet til Ivar Aasen.
+     */
+  private void moveSunglasses(){
+      x = x+xVelocity;
+        int speedUp = xVelocity * -2;
 
-      if (x > PANEL_WIDTH-sunglasses.getWidth() || x<0){
-        xVelocity = speedUp;
-      }
+        if (x > PANEL_WIDTH-sunglasses.getWidth() || x<0){
+          xVelocity = speedUp;
+        }
 
-      if (xVelocity <0 && x == onEye ){
-        xVelocity = 0;
-        timer.stop();
-      }
-  }
-
-
+        if (xVelocity <0 && x == onEye ){
+          xVelocity = 0;
+          timer.stop();
+        }
+    }
 }

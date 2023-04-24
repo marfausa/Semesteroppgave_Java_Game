@@ -7,6 +7,11 @@ import java.util.Random;
 
 public class QuizWordFactory {
     private Color darkBlue = new Color(0, 153 , 153);
+    ArrayList<QuizWord> level1Words = new ArrayList<>();
+    ArrayList<QuizWord> level2Words = new ArrayList<>();
+    ArrayList<QuizWord> level3Words = new ArrayList<>();
+    ArrayList<QuizWord> level4Words = new ArrayList<>();
+    ArrayList<QuizWord> level5Words = new ArrayList<>();
     
     //String[] quizWords;
     QuizWord[] level5 = {
@@ -220,12 +225,9 @@ public class QuizWordFactory {
     };
     
 
-ArrayList<QuizWord> level1Words = new ArrayList<>();
-ArrayList<QuizWord> level2Words = new ArrayList<>();
-ArrayList<QuizWord> level3Words = new ArrayList<>();
-ArrayList<QuizWord> level4Words = new ArrayList<>();
-ArrayList<QuizWord> level5Words = new ArrayList<>();
-
+    /**
+     * Konstruktøren lager ny liste av QuizWord-objektene som kan hentes fra QuizModel.
+     */
 public QuizWordFactory() {
     for (int i = 0; i < level1.length; i++) {
         level1Words.add(level1[i]);
@@ -244,6 +246,10 @@ public QuizWordFactory() {
     }
 }
 
+/**
+     * @param level Tar inn en verdi som er lik nivået til listen som skal returneres ved en switch case funksjon.
+     * @return hele listen som tilhører nivået.
+     */
 public ArrayList<QuizWord> getWordList(int level){
     ArrayList<QuizWord> returnList = new ArrayList<>();
     switch (level){
@@ -266,21 +272,22 @@ public ArrayList<QuizWord> getWordList(int level){
     return returnList;
 }
 
+  /**
+     * @param level Kaller på metoden getWordList og sender videre verdien som er lik nivået til listen som skal returneres.
+     * @return selection. Returnerer en ny liste som går igjennom nivåets korresponderende ordliste og henter inn kun 5 tilfeldige ord fra den.
+     */
 public ArrayList<QuizWord> GetNewQuizWords(int level) {
     ArrayList<QuizWord> chosenLevel = getWordList(level);
     ArrayList<QuizWord> selection = new ArrayList<>();
     
     Random r = new Random();
 
-    // Loop 5 times to select 5 random elements
     for (int j = 0; j < 5; j++) {
-        // Generate a random index
+   
         int randomIndex = r.nextInt(chosenLevel.size());
         
-        // Get the element at the random index and add it to the selection list
         selection.add(chosenLevel.get(randomIndex));
-        
-        // fjern frå questions
+    
         chosenLevel.remove(randomIndex);
   }
 

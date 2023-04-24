@@ -14,12 +14,23 @@ public class QuizWord {
         this.color = color;
     }
 
+    /**
+     * @return Ordet som skal oversettes fra QuizWord-objekt.
+     */
     public String getQuestion(){
         return this.word;
     }
+    
+     /**
+     * @return Riktig fasit fra QuizWord-objekt.
+     */
     public String getAnswer(){
         return this.answer;
     }
+
+     /**
+     * @return Fargen som forbindes med QuizWord-objekt.
+     */
     public Color getWordColor(){
         return this.color;
     }

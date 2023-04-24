@@ -4,26 +4,40 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+
+import no.uib.inf101.sem2.model.GameState;
 import no.uib.inf101.sem2.model.QuizModel;
 
 
-public class GameOver {
-  private Rectangle2D button;
-  private boolean continueIsPressed = false;
+public class GameOver implements ViewableQuizModel{
+  Rectangle2D button;
+  GameState gameState = GameState.GAME_OVER;
+  public boolean continueIsPressed;
 
-  int PANEL_WIDTH;
-  int x;
-  int y;
-  int countdown = 1;
-  
-
-  public GameOver(int pw) {
-    PANEL_WIDTH = pw;
+  public GameOver() {
+    continueIsPressed = false;
   
   }
 
+  @Override
+  public Rectangle2D getButton(){
+    return this.button;
+  }
+  @Override
+  public GameState getGameState() {
+    return this.gameState;
+  }
+
+
+  /**
+     * Tar inn Graphics2D objekt, Rectangle2D rektangel, Color farge når musepeker er på knapp, Quizmodel-model og siste størrelsen til font.
+     * @param g2
+     * @param rect
+     * @param hovercolor
+     * @param model
+     * @param end 
+     */
   public void draw(Graphics2D g2, Rectangle2D rect, Color hoverColor, QuizModel model, float end) {
-    
       Color color = hoverColor;
       g2.setColor(Color.BLACK);
       g2.draw(rect);
@@ -43,31 +57,24 @@ public class GameOver {
       g2.setColor(Color.PINK);
       g2.setFont(new Font("Helvetica", Font.ITALIC, 40));
       g2.drawString(model.getCurrentAnswer() , 150, 220);
-      
-      
+       
       button = new Rectangle2D.Double(rect.getCenterX()-150, rect.getY() * 11.5, 300, 100);
       g2.setColor(color);
       g2.draw(button);
       
       Inf101Graphics.drawCenteredString(g2, "Freista på nytt?", button);
      
-
       if (continueIsPressed()) {
         button = new Rectangle2D.Double();
-        
       }
     }
-  
-
-  public Rectangle2D getButton(){
-    return this.button;
-  }
   
   public boolean continueIsPressed(){
     return this.continueIsPressed;
   }
-  
   public void pressContinue(boolean bool){
     this.continueIsPressed = bool;
   }
+
+  
 }

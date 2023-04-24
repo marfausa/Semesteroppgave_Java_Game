@@ -25,7 +25,7 @@ public class QuizController implements KeyListener{
             char keyChar = e.getKeyChar();
             
             if (keyChar == KeyEvent.VK_ENTER) {
-                // Enter key was pressed
+                // Dersom enter-tasten er registreres sendes currentInput til model, for så sjekke om det er riktig opp mot fasit.
                 if (controller.inputCheckAnswer(currentInput) == false){
                     currentInput = "";
                 } else if (controller.inputCheckAnswer(currentInput)){
@@ -34,13 +34,13 @@ public class QuizController implements KeyListener{
                 }
 
             } else if (keyChar == KeyEvent.VK_BACK_SPACE) {
-                // Backspace key was pressed
+                // Dersom backspace-knappen registreres fjerner den det siste tegnet fra currentInput og sender currentInput til model.
                 if (currentInput.length() > 0) {
                     String deletedInput = currentInput.substring(0, currentInput.length() - 1);
                     currentInput = deletedInput;
                 }
             } else if (keyChar != KeyEvent.CHAR_UNDEFINED) {
-                // Some other key was pressed
+                // Dersom gyldige taster registreres legges dette til currentInput.
                 currentInput += keyChar;
                 
             }
