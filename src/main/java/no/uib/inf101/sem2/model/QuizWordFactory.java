@@ -15,8 +15,8 @@ public class QuizWordFactory {
     
     //String[] quizWords;
     QuizWord[] level5 = {
-        new QuizWord("Få hugilt","bli ille til mote", darkBlue),
-        new QuizWord("Kome or vona", "miste håpet", darkBlue),
+        new QuizWord("Få hugilt","Bli ille til mote", darkBlue),
+        new QuizWord("Kome or vona", "Miste håpet", darkBlue),
         new QuizWord("Rettferdsvederlag", "Billighetserstatning", darkBlue),
         new QuizWord("Kome på rakedeisen", "Komme på avveie", darkBlue),
         new QuizWord("Vørdsamt", "Ærbødigst", darkBlue),
@@ -47,7 +47,7 @@ public class QuizWordFactory {
         new QuizWord("Røyndomsfjern", "Virkelighetsfjern", Color.MAGENTA.darker()),
         new QuizWord("Velgjerd", "Veldedighet", Color.MAGENTA.darker()),
         new QuizWord("Utferding", "Utstedelse", Color.MAGENTA.darker()),
-        new QuizWord("Beinveges", "Umiddelbart", Color.MAGENTA.darker()),
+        new QuizWord("Beinveges", "Umiddelbar", Color.MAGENTA.darker()),
         new QuizWord("Dragnad", "Tilbøyelighet", Color.MAGENTA.darker()),
         new QuizWord("Venleik", "Skjønnhet", Color.MAGENTA.darker()),
         new QuizWord("Mellombels", "Midlertidig", Color.MAGENTA.darker()),
@@ -55,7 +55,7 @@ public class QuizWordFactory {
         new QuizWord("Medynk", "Medlidenhet", Color.MAGENTA.darker()),
         new QuizWord("Keisemd", "Kjedsomhet", Color.MAGENTA.darker()),
         new QuizWord("Avretting", "Henrettelse", Color.MAGENTA.darker()),
-        new QuizWord("Attval", "Gjengvalg", Color.MAGENTA.darker()),
+        new QuizWord("Attval", "Gjenvalg", Color.MAGENTA.darker()),
         new QuizWord("Tverrbuar", "Gjenboer", Color.MAGENTA.darker()),
         new QuizWord("Føremon", "Fordel", Color.MAGENTA.darker()),
         new QuizWord("Rørsle", "Bevegelse", Color.MAGENTA.darker()),
@@ -174,7 +174,7 @@ public class QuizWordFactory {
         new QuizWord("Yrkedag","Virkedag", Color.WHITE),
         new QuizWord("Arbeidsløyse", "Arbeidsledighet", Color.WHITE),
         new QuizWord("Byrja", "Begynne", Color.WHITE),
-        new QuizWord("Førespurnad", "forespørsel", Color.WHITE),
+        new QuizWord("Førespurnad", "Forespørsel", Color.WHITE),
         new QuizWord("Fridom", "Frihet", Color.WHITE),
         new QuizWord("Viten", "Kunnskap", Color.WHITE),
         new QuizWord("Kvifor", "Hvorfor", Color.WHITE),
