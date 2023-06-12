@@ -31,6 +31,8 @@ public class QuizWordFactory {
         new QuizWord("Den Høgvørde Kronprinsessa", "Hennes Kongelige Høyhet Kronprinsessen", darkBlue),
         new QuizWord("Røynsle", "Erfaring", darkBlue),
         new QuizWord("Hugnadsam", "Hyggelig", darkBlue),
+        new QuizWord("vonbrot", "skuffelse", darkBlue),
+        new QuizWord("jåss", "tøys", darkBlue),
 
     };
 
@@ -116,6 +118,8 @@ public class QuizWordFactory {
         new QuizWord("Ålmen", "Allmenn", Color.ORANGE),
         new QuizWord("Naudsynt", "Nødvendig", Color.ORANGE),
         new QuizWord("Likeins", "Likedan", Color.ORANGE),
+        new QuizWord("tilråding", "anbefaling", Color.ORANGE),
+
            
     };
 
@@ -166,6 +170,8 @@ public class QuizWordFactory {
         new QuizWord("Hjå", "Hos", Color.YELLOW),
         new QuizWord("Attergangar", "Gjenganger", Color.YELLOW),
         new QuizWord("Føresetnad", "Forutsetning", Color.YELLOW),
+        new QuizWord("vêr", "vær", Color.YELLOW),
+        
         
 
     };
