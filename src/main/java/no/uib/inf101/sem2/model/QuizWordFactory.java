@@ -31,8 +31,10 @@ public class QuizWordFactory {
         new QuizWord("Den Høgvørde Kronprinsessa", "Hennes Kongelige Høyhet Kronprinsessen", darkBlue),
         new QuizWord("Røynsle", "Erfaring", darkBlue),
         new QuizWord("Hugnadsam", "Hyggelig", darkBlue),
-        new QuizWord("vonbrot", "skuffelse", darkBlue),
-        new QuizWord("jåss", "tøys", darkBlue),
+        new QuizWord("Vonbrot", "Skuffelse", darkBlue),
+        new QuizWord("Jåss", "Tøys", darkBlue),
+        new QuizWord("Følgjast åt", "Ledsage", darkBlue),
+        new QuizWord("åtak", "angrep", darkBlue)
 
     };
 
@@ -68,6 +70,12 @@ public class QuizWordFactory {
         new QuizWord("I røynda", "I virkeligheten", Color.MAGENTA.darker()),
         new QuizWord("Lét", "Lot", Color.MAGENTA.darker()),
         new QuizWord("Lèt", "Lar", Color.MAGENTA.darker()),
+        new QuizWord("Vitje", "Besøke", Color.MAGENTA.darker()),
+        new QuizWord("Plar", "Pleier", Color.MAGENTA.darker()),
+        new QuizWord("Løyne", "Skjule", Color.MAGENTA.darker()),
+        new QuizWord("Handsaming", "Behandling", Color.MAGENTA.darker()),
+        new QuizWord("lagnad", "skjebne", Color.MAGENTA.darker())
+
 
 
     };
@@ -118,7 +126,11 @@ public class QuizWordFactory {
         new QuizWord("Ålmen", "Allmenn", Color.ORANGE),
         new QuizWord("Naudsynt", "Nødvendig", Color.ORANGE),
         new QuizWord("Likeins", "Likedan", Color.ORANGE),
-        new QuizWord("tilråding", "anbefaling", Color.ORANGE),
+        new QuizWord("Tilråding", "Anbefaling", Color.ORANGE),
+        new QuizWord("Eining", "Enhet", Color.ORANGE),
+        new QuizWord("Oppseding", "Oppdragelse", Color.ORANGE),
+        new QuizWord("framsyning","forestilling", Color.ORANGE),
+        new QuizWord("Oppmode", "Anmode", Color.ORANGE)
 
            
     };
@@ -133,10 +145,7 @@ public class QuizWordFactory {
         new QuizWord("Tilsett", "Ansatt", Color.YELLOW),
         new QuizWord("Åtvare", "Advare", Color.YELLOW),
         new QuizWord("Openheit", "Åpenhet", Color.YELLOW),
-        new QuizWord("Åtvare", "Advare", Color.YELLOW),
-        new QuizWord("Åtvare", "Advare", Color.YELLOW),
         new QuizWord("Øvst", "Øverst", Color.YELLOW),
-        new QuizWord("Åtvare", "Advare", Color.YELLOW),
         new QuizWord("Uynskt", "Uønsket", Color.YELLOW),
         new QuizWord("Utgreiing", "Utredning", Color.YELLOW),
         new QuizWord("Utnemning", "Utnevnelse", Color.YELLOW),
@@ -171,6 +180,11 @@ public class QuizWordFactory {
         new QuizWord("Attergangar", "Gjenganger", Color.YELLOW),
         new QuizWord("Føresetnad", "Forutsetning", Color.YELLOW),
         new QuizWord("vêr", "vær", Color.YELLOW),
+        new QuizWord("Samstundes", "Samtidig", Color.MAGENTA.darker()),
+        new QuizWord("Vanske", "Vanskelighet", Color.MAGENTA.darker()),
+        new QuizWord("Ærlegdom", "Ærlighet", Color.MAGENTA.darker()),
+        new QuizWord("Sparsemd", "Sparsomhet", Color.MAGENTA.darker()),
+        new QuizWord("Åtferd", "Adferd", Color.MAGENTA.darker())
         
         
 
@@ -227,6 +241,18 @@ public class QuizWordFactory {
         new QuizWord("Ynskje", "Ønske", Color.WHITE),
         new QuizWord("Mykje", "Mye", Color.WHITE),
         new QuizWord("Fyrst", "Først", Color.WHITE),
+        new QuizWord("Forelsking", "Forelskelse", Color.WHITE),
+        new QuizWord("Opphav", "Opprinnelse", Color.WHITE),
+        new QuizWord("Anten", "Enten", Color.WHITE),
+        new QuizWord("Kjem", "Kommer", Color.WHITE),
+        new QuizWord("Rekkje", "Rekke", Color.WHITE),
+        new QuizWord("Vart", "Ble", Color.WHITE),
+        new QuizWord("Verte", "Bli", Color.WHITE),
+        new QuizWord("Vert", "Blir", Color.WHITE),
+        new QuizWord("Eg", "Jeg", Color.WHITE),
+        new QuizWord("Me", "Vi", Color.WHITE),
+        new QuizWord("Ikkje", "Ikke", Color.WHITE)
+
 
     };
     
